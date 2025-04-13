@@ -129,6 +129,7 @@ import javax.crypto.SecretKey;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.security.Keys;
 
@@ -138,9 +139,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class JWTService {
 
+    private final CustomOAuth2UserService customOAuth2UserService;
+
     private String secretKey;
 
-    public JWTService() {
+    public JWTService(CustomOAuth2UserService customOAuth2UserService) {
         try {
             KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
             SecretKey sk = keyGen.generateKey();
@@ -148,21 +151,23 @@ public class JWTService {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Error generating secret key", e);
         }
+        this.customOAuth2UserService = customOAuth2UserService;
     }
-    public String generateToken(String username) {
-        Map<String, Object> claims = new HashMap<>();
     
-        // Adding claims if needed, you can customize the claims map
-        // Example: claims.put("role", "admin");
+    public String generateToken(String email, String name) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("email", email);
+        claims.put("name", name); // ✅ Include name
     
         return Jwts.builder()
-                .setClaims(claims) // Add claims to the JWT builder
-                .setSubject(username) // Set the username as the subject
-                .setIssuedAt(new Date(System.currentTimeMillis())) // Set issue date
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // Set expiration time (10 hours)
-                .signWith(getKey()) // Sign with the secret key
-                .compact(); // Generate the JWT token as a string
+                .setClaims(claims)
+                .setSubject(email)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 3600000))
+                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .compact();
     }
+    
     
 
     private Key getKey() {

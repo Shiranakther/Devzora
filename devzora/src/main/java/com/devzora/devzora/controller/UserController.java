@@ -28,7 +28,7 @@ public class UserController {
         public ResponseEntity<?> login(@RequestBody Users user) {
         String result = service.verify(user);
 
-        if ("failed".equals(result)) {
+        if (result == null || "failed".equals(result)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                                 .body("Invalid username or password");
         }

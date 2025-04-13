@@ -20,6 +20,10 @@ public class Users {
     private String id;
     private String username;
     private String password;
+    private String provider;  // The OAuth2 provider (e.g., "google", "facebook")
+    private String providerId; // The user ID from the OAuth2 provider
+    private String name; 
+    private String email;  // Optional: Store user's email
 
 
 }

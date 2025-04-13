@@ -36,7 +36,7 @@ public class UserService {
             );
     
             if (authentication.isAuthenticated()) {
-                String token = jwtService.generateToken(user.getUsername());
+                String token = jwtService.generateToken(user.getUsername(),user.getEmail());
                 System.out.println("Generated Token: " + token); // ✅ Debug log
                 return token;
             }
