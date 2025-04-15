@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,6 +20,7 @@ public class Users {
 
     @Id
     private String id;
+    
     private String username;
     private String password;
     private String provider;  // The OAuth2 provider (e.g., "google", "facebook")
@@ -25,6 +28,7 @@ public class Users {
     private String name; 
     private String email;  // Optional: Store user's email
     private String phone;
+    private List<String> roles;
 
 
 }

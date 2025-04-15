@@ -52,12 +52,20 @@ public class SecurityConfig {
         return http
              .cors(cors -> cors.configurationSource(corsConfigurationSource))
             .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/register","/login","/").permitAll()  // Allow registration without authentication
-            .requestMatchers("/user/**", "/course/**").authenticated()  // Secure the /user endpoints (GET, PUT, DELETE) to authenticated users
+        //     .authorizeHttpRequests(auth -> auth
+        //     .requestMatchers("/register","/login","/").permitAll()  // Allow registration without authentication
+        //     .requestMatchers("/user/**", "/course/**").authenticated()  // Secure the /user endpoints (GET, PUT, DELETE) to authenticated users
 
-            .anyRequest().authenticated()  // All other requests require authentication
+        //     .anyRequest().authenticated()  // All other requests require authentication
+        // )
+                .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/register", "/login", "/").permitAll()
+            .requestMatchers("api/admin/**").hasRole("ADMIN")
+            .requestMatchers("api/instructor/**").hasAnyRole("INSTRUCTOR", "ADMIN")
+            .requestMatchers("api/user/**").hasAnyRole("USER", "ADMIN")
+            .anyRequest().authenticated()
         )
+
 
 
         .oauth2Login(oauth2 -> oauth2

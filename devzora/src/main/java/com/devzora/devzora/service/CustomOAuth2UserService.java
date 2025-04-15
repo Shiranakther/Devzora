@@ -65,6 +65,7 @@ package com.devzora.devzora.service;
 import com.devzora.devzora.model.Users;
 import com.devzora.devzora.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -77,6 +78,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     @Autowired
     private UserRepo repo;
+
+    @Autowired
+    @Lazy
+    private JWTService jwtService;
 
     @Override
 public OAuth2User loadUser(OAuth2UserRequest userRequest) {
@@ -118,6 +123,11 @@ public OAuth2User loadUser(OAuth2UserRequest userRequest) {
     } else {
         System.out.println("🔁 Existing OAuth2 user found: " + email);
     }
+
+        String jwtToken = jwtService.generateToken(email, name); // Use email and name for token
+
+        // You can store or return this token as part of the response, depending on your use case
+        System.out.println("✅ JWT Token generated: " + jwtToken);
 
     return oAuth2User;
 }

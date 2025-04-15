@@ -1,5 +1,7 @@
 package com.devzora.devzora.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,10 +26,33 @@ public class UserService {
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
+    // public Users register(Users user) {
+    //     user.setPassword(encoder.encode(user.getPassword()));
+    //     return repo.save(user);
+    // }
+
     public Users register(Users user) {
-        user.setPassword(encoder.encode(user.getPassword()));
-        return repo.save(user);
+
+        if (repo.findByUsername(user.getUsername()) != null) {
+            throw new RuntimeException("Username already exists.");
+        }
+        
+        if (repo.findByEmail(user.getEmail()) != null) {
+            throw new RuntimeException("Email already exists.");
+        }
+        
+
+    // Set default role if not provided
+    if (user.getRoles() == null || user.getRoles().isEmpty()) {
+        user.setRoles(List.of("USER")); // You can set ADMIN or INSTRUCTOR too
     }
+
+    // Encode password
+    user.setPassword(encoder.encode(user.getPassword()));
+
+    // Save to DB
+    return repo.save(user);
+}
 
     public String verify(Users user){
         try {
@@ -47,5 +72,10 @@ public class UserService {
     
         return "failed";
     }
+
+    public Users findByUsername(String username) {
+        return repo.findByUsername(username);
+    }
+    
     
 }
