@@ -12,7 +12,7 @@ const App = () => {
     <Router>
       <div style={styles.container}>
         <h1 style={styles.appHeader}>My React App</h1>
-        <Routes>  {/* Use Routes instead of Switch */}
+        <Routes>  
           <Route path="/" element={<Home />} /> {/* Use element prop */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
