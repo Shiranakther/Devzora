@@ -18,11 +18,7 @@ public class UserPrincipal implements UserDetails {
 
    
 
-    // @Override
-    // public Collection<? extends GrantedAuthority> getAuthorities() {
-    //     // Return the authorities granted to the user
-    //     return Collections.singleton(new SimpleGrantedAuthority("USER")); // Implement this method based on your requirements
-    // }
+   
 
      @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -66,7 +62,7 @@ public class UserPrincipal implements UserDetails {
     
 
    
-    // Implement other methods from UserDetails interface as needed
+
     
 
 
