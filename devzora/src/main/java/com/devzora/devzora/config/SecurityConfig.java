@@ -15,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.*;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 import com.devzora.devzora.component.CustomOAuth2SuccessHandler;
 import com.devzora.devzora.filter.JWTFilter;
 import com.devzora.devzora.service.CustomOAuth2UserService;
