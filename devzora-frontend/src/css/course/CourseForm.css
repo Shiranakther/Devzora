@@ -1,0 +1,171 @@
+/* Form Container */
+.form-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 50px;
+    background-color: #ffffff;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  /* Input Fields */
+  .input-field,
+  textarea {
+    width: 100%;
+    height: 35px;
+    padding: 5px 12px;
+    font-size: 16px;
+    border: 1.5px solid #dcdcdc;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+    resize: vertical;
+  }
+  
+  textarea {
+    min-height: 100px;
+    height: auto;
+  }
+  
+  .input-field:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  }
+  
+  /* Layout Helpers */
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+  
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Checkbox */
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 17px;
+  }
+  
+  .checkbox-input {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Submit Button */
+  .button-submit {
+    padding: 12px 24px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-submit:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Module Section */
+  .module-section {
+    padding: 25px;
+    border: 2px solid #e0e0e0;
+    border-radius: 14px;
+    background-color: #f8f9fa;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  /* Lesson Section */
+  .lesson-section {
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-left: 5px solid #007bff;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Section Titles */
+  h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Buttons for Modules & Lessons */
+  .button-secondary {
+    padding: 10px 20px;
+    background-color: #6c757d;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-secondary:hover {
+    background-color: #5a6268;
+  }
+  
+  .button-danger {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-danger:hover {
+    background-color: #c82333;
+  }
+  
+  /* Responsive Adjustments */
+  @media screen and (max-width: 768px) {
+    .form-container {
+      padding: 30px 20px;
+    }
+  
+    .flex-row {
+      flex-direction: column;
+    }
+  
+    .button-submit,
+    .button-secondary,
+    .button-danger {
+      width: 100%;
+      text-align: center;
+    }
+  
+    .checkbox-label {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  
