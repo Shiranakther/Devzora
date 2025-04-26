@@ -154,4 +154,3 @@ const CourseForm = ({ onSubmit, course = {} }) => {
 };
 
 export default CourseForm;
-

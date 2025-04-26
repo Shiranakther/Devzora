@@ -75,7 +75,6 @@ const CourseList = () => {
                 <button className="enroll-button" onClick={() => handleEnroll(course.id)}>
                      Enroll
                 </button>
-
               </div>
             </div>
           </div>
