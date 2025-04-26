@@ -6,34 +6,31 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Callback from './component/Callback ';
 import UserTypeSelection from './pages/UserTypeSelection';
-
+import CourseList from './pages/CourseList';
+import CreateCourse from './pages/CreateCourse';
+import EditCourse from './pages/EditCourse';
+import CourseDetailView from './pages/CourseDetailView';
 const App = () => {
   return (
     <Router>
-      <div style={styles.container}>
-        <h1 style={styles.appHeader}>My React App</h1>
+      
+        
         <Routes>  
           <Route path="/" element={<Home />} /> {/* Use element prop */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/user-type" element={<UserTypeSelection />} />
           <Route path="/callback" element={<Callback />} />
+          <Route path="/courses" element={<CourseList />} />
+          <Route path="/create-course" element={<CreateCourse />} />
+          <Route path="/edit-course/:id" element={<EditCourse />} />
+          <Route path="/course-details/:id" element={<CourseDetailView />} />
         </Routes>
-      </div>
+      
     </Router>
   );
 };
 
-const styles = {
-  container: {
-    textAlign: 'center',
-    padding: '20px',
-  },
-  appHeader: {
-    fontSize: '2.5rem',
-    color: '#333',
-    marginBottom: '20px',
-  }
-};
+
 
 export default App;
