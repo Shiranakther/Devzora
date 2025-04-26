@@ -20,15 +20,6 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/course")
 @RequiredArgsConstructor
-// public class CourseController {
-
-//     @GetMapping("/course-details")
-//     public String Course(){
-//         return "courses";
-//     }
-
-
-// }
 public class CourseController {
 
     private final CourseService courseService;
