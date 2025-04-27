@@ -1,0 +1,66 @@
+name: PR Check - Spring Boot + MongoDB
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      mongo:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd="mongosh --eval 'db.runCommand({ ping: 1 })'"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v4
+
+    # Debugging: List files in the devzora directory to confirm the correct directory
+    - name: List files in devzora directory for debugging
+      run: ls -la ./devzora
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+
+    # Optionally install Maven if it's not bundled with Java setup
+    - name: Set up Maven
+      run: sudo apt-get install -y maven
+
+    - name: Cache Maven packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+
+    # Build the project with Maven
+    - name: Build with Maven
+      run: mvn clean install
+      working-directory: ./devzora  # Ensure this is correct
+
+    # Wait for MongoDB to be ready
+    - name: Wait for MongoDB to be ready
+      run: |
+        echo "Waiting for MongoDB to be ready..."
+        until curl --silent --fail mongodb://mongo:27017; do
+          echo "Waiting for MongoDB to be ready..."
+          sleep 5
+        done
+
+    # Run tests
+    - name: Run Tests
+      run: mvn test
+      working-directory: ./devzora  # Ensure this is correct
