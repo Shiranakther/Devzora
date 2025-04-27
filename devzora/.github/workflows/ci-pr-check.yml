@@ -9,20 +9,11 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-    services:
-      mongo:
-        image: mongo:latest
-        ports:
-          - 27017:27017
-        options: >-
-          --health-cmd="mongosh --eval 'db.runCommand({ ping: 1 })'" 
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-
     steps:
     - name: Checkout the code
       uses: actions/checkout@v4
+
+    # Debugging: List files in the devzora directory to confirm the correct directory
     - name: List files in devzora directory for debugging
       run: ls -la ./devzora
 
@@ -32,6 +23,7 @@ jobs:
         distribution: 'temurin'
         java-version: '21'
 
+    # Optionally install Maven if it's not bundled with Java setup
     - name: Set up Maven
       run: sudo apt-get install -y maven
 
@@ -43,19 +35,12 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
 
-
-
+    # Build the project with Maven
     - name: Build with Maven
       run: mvn clean install
-      working-directory: ./devzora  # Change this if needed
+      working-directory: ./devzora  # Ensure this is correct
 
-    - name: Wait for MongoDB to be ready
-      run: |
-        until curl --silent --fail mongodb://localhost:27017; do
-          echo "Waiting for MongoDB to be ready..."
-          sleep 5
-        done
-
+    # Run tests
     - name: Run Tests
       run: mvn test
-      working-directory: ./devzora  # Change this if needed
+      working-directory: ./devzora  # Ensure this is correct
