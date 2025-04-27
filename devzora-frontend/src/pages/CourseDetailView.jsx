@@ -97,11 +97,12 @@ const CourseDetailView = () => {
               <h3>{mod.title}</h3>
               {mod.lessons.map((lesson, lidx) => (
                 <div key={lidx} className="lesson-block">
-                   
+                  
                   <h4>{lesson.title}</h4>
                   <p>{lesson.content}</p>
                   <p><strong>Type:</strong> {lesson.type}</p>
                   <p><strong>Duration:</strong> {lesson.durationMinutes} mins</p>
+                  <p><strong>Video</strong> {lesson.mediaUrl} </p>
                 </div>
               ))}
             </div>

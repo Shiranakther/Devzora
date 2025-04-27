@@ -133,4 +133,26 @@
   .enroll-button:hover {
     background-color: #218838;
   }
-  
+  .course-list-header{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    
+    margin: 0px 185px 30px 185px;
+  }
+
+    .search-bar-container {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    
+    .search-input {
+      padding: 10px;
+      width: 75%;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    
+    /* CourseDetailView.css */
