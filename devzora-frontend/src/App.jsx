@@ -16,12 +16,12 @@ const App = () => {
       
         
         <Routes>  
-          <Route path="/" element={<Home />} /> {/* Use element prop */}
+          <Route path="/" element={<Home />} /> 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/user-type" element={<UserTypeSelection />} />
           <Route path="/callback" element={<Callback />} />
-          <Route path="/courses" element={<CourseList />} />
+          <Route path="/course" element={<CourseList />} />
           <Route path="/create-course" element={<CreateCourse />} />
           <Route path="/edit-course/:id" element={<EditCourse />} />
           <Route path="/course-details/:id" element={<CourseDetailView />} />

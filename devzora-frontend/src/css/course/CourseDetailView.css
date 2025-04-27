@@ -215,3 +215,83 @@
     font-size: 1rem;
   }
   
+  /* CourseDetailView.css */
+
+.course-sidebar {
+  width: 300px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: sticky;
+  top: 20px;
+}
+
+.price-box {
+  text-align: center;
+}
+
+.discounted-price {
+  font-size: 28px;
+  color: #e63946;
+  font-weight: bold;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #888;
+  margin-left: 8px;
+  font-size: 18px;
+}
+
+.sale-info {
+  color: #1d3557;
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.guarantee {
+  color: #2a9d8f;
+  font-weight: 500;
+  margin-top: 12px;
+  font-size: 15px;
+}
+
+.includes {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.includes h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #264653;
+}
+
+.includes ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.buy-button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #457b9d;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.buy-button:hover {
+  background-color: #1d3557;
+}
