@@ -68,13 +68,13 @@ public class SecurityConfig {
         ) .successHandler(successHandler)// You can change this to any success URL
         )
         
-        .logout(logout -> logout
-            .logoutUrl("/logout")               // URL to trigger logout
-            .logoutSuccessUrl("/")              // Redirect here after logout
-            .invalidateHttpSession(true)        // Invalidate session
-            .clearAuthentication(true)          // Clear authentication
-            .deleteCookies("JSESSIONID")        // Delete cookie
-        )
+        // .logout(logout -> logout
+        //     .logoutUrl("/logout")               // URL to trigger logout
+        //     .logoutSuccessUrl("/")              // Redirect here after logout
+        //     .invalidateHttpSession(true)        // Invalidate session
+        //     .clearAuthentication(true)          // Clear authentication
+        //     .deleteCookies("JSESSIONID")        // Delete cookie
+        // )
             .httpBasic(Customizer.withDefaults())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class) // Add JWT filter before the authentication filter
