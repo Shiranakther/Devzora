@@ -1,80 +1,86 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 const Home = () => {
   const [user, setUser] = useState(null);
   const [role, setRole] = useState(null);
   const navigate = useNavigate();
 
+  // Helper function: Check if token is expired
+  const isTokenExpired = (token) => {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const currentTime = Math.floor(Date.now() / 1000);
+      return payload.exp < currentTime;
+    } catch (err) {
+      return true;
+    }
+  };
+
+  // First useEffect: Handle token parsing and set user
   useEffect(() => {
-    // Check if there's a token in the URL parameters
     const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token'); // Get token from URL query parameter
-    
-    if (token) {
-      // Store token in localStorage
-      localStorage.setItem('token', token);
+    const tokenFromUrl = urlParams.get('token');
+    let tokenToUse = tokenFromUrl || localStorage.getItem('token');
 
-      
+    if (tokenFromUrl) {
+      // Save to localStorage if it came from URL
+      localStorage.setItem('token', tokenFromUrl);
+      window.history.replaceState({}, document.title, window.location.pathname); // Clean URL
+    }
 
-      try {
-        // Decode JWT token to get user data
-        const userData = JSON.parse(atob(token.split('.')[1])); // Decode JWT
-        setUser(userData);
-      } catch (err) {
-        console.error('Invalid token', err);
+    if (tokenToUse) {
+      if (isTokenExpired(tokenToUse)) {
+        console.warn("Token expired");
+        localStorage.removeItem('token');
         navigate('/login');
-      }
-
-      
-    } else {
-      // Check if token is already in localStorage
-      const storedToken = localStorage.getItem('token');
-
-      
-
-      if (storedToken) {
+      } else {
         try {
-          const userData = JSON.parse(atob(storedToken.split('.')[1])); // Decode JWT
+          const userData = JSON.parse(atob(tokenToUse.split('.')[1]));
           setUser(userData);
-          console.log('User data:', userData); // Debugging
+          console.log("User data:", userData);
         } catch (err) {
-          console.error('Invalid stored token', err);
+          console.error("Failed to parse token", err);
+          localStorage.removeItem('token');
           navigate('/login');
         }
-      } else {
-        navigate('/login'); // Redirect to login if no token found
       }
+    } else {
+      navigate('/login');
     }
   }, [navigate]);
 
-  const fetchUserData = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8080/me', {
-        headers: { "Authorization": `Bearer ${token}` },
-      });
+  // Second useEffect: Fetch user role after user is decoded
+  useEffect(() => {
+    const fetchUserData = async () => {  
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get('http://localhost:8080/me', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true, // optional if using cookies
+        });
 
-      
-      setRole(response.data.roles[0]); // Assuming roles is an array and we want the first role
-    } catch (err) {
-      console.error('Error fetching user data', err);
-      navigate('/login'); // Redirect to login if there’s an error
+        if (response.data.roles && response.data.roles.length > 0) {
+          setRole(response.data.roles[0]);
+        }
+      } catch (err) {
+        console.error("Error fetching user data", err);
+        navigate('/login');
+      }
+    };
+
+    if (user) {
+      fetchUserData();
     }
-  };
-
-  fetchUserData();
-
-
- 
+  }, [user, navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Remove token on logout
-    navigate('/login'); // Redirect to login page
+    localStorage.removeItem('token');
+    navigate('/login');
   };
-
- 
-
 
   return (
     <div style={styles.container}>
@@ -82,11 +88,11 @@ const Home = () => {
       {user ? (
         <div style={styles.userInfo}>
           <p style={styles.welcomeText}>Hello, {user.name ? user.name : user.sub}!</p>
-          <p style={styles.welcomeText}>Your Role is, {role? role : null}!</p> {/* Display name if available, otherwise use sub */}
+          <p style={styles.welcomeText}>Your Role is: {role ? role : "Loading..."}</p>
           <button onClick={handleLogout} style={styles.logoutButton}>Logout</button>
         </div>
       ) : (
-        <p>You are not logged in</p>
+        <p>You are not logged in.</p>
       )}
     </div>
   );
@@ -106,6 +112,7 @@ const styles = {
   },
   welcomeText: {
     fontSize: '1.2rem',
+    margin: '10px 0',
   },
   logoutButton: {
     padding: '10px 20px',
@@ -114,8 +121,8 @@ const styles = {
     color: 'white',
     border: 'none',
     cursor: 'pointer',
+    borderRadius: '5px',
   }
 };
 
 export default Home;
-
