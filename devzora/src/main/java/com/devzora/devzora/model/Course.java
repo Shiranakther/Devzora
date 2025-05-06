@@ -44,6 +44,9 @@ public class Course {
     private String status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    private String userId;
+
     private String instructorId;
     private List<Module> modules;
 }
