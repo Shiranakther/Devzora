@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.annotation.Id;
 
@@ -22,5 +20,4 @@ public class Post {
     private List<String> imageList;
     private String video;
     private String courseLink;
-    private List<Comment> comments = new ArrayList<>();
 }
