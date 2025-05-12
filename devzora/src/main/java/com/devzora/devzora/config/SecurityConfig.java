@@ -49,7 +49,7 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource))  // Apply CORS configuration
             .csrf(csrf -> csrf.disable()) // Disable CSRF protection for stateless APIs
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/register", "/login", "/","/oauth2/**","/login/oauth2/**").permitAll()  // Allow these endpoints to be accessed without authentication
+                .requestMatchers("/register", "/login", "/","/oauth2/**","/login/oauth2/**","/api/videos/upload").permitAll()  // Allow these endpoints to be accessed without authentication
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")  // Only users with the "ADMIN" role can access these endpoints
                 .requestMatchers("/api/instructor/**").hasAnyRole("INSTRUCTOR", "ADMIN") // Allow both "INSTRUCTOR" and "ADMIN" roles
                 .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN") // Allow "USER" and "ADMIN" roles

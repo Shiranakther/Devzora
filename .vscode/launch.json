@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-DevzoraApplication<devzora>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.devzora.devzora.DevzoraApplication",
+            "projectName": "devzora",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
