@@ -41,6 +41,7 @@ public class UserController {
             return ResponseEntity.ok().body(result); // token as body
 }
 
+
             @GetMapping("/me")
             public ResponseEntity<?> getCurrentUser(Authentication authentication) {
                 String username = authentication.getName(); // from JWT context
