@@ -18,7 +18,8 @@ public class CorsConfig {
         config.setAllowCredentials(true);
         config.setAllowedOrigins(List.of("http://localhost:5173")); // Adjust your frontend URL here
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedMethods(List.of("*"));
+        config.setAllowCredentials(true); 
         config.setExposedHeaders(List.of("Authorization"));
 
         // Use the correct UrlBasedCorsConfigurationSource from the standard package

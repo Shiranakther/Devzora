@@ -10,23 +10,43 @@ import CourseList from './pages/CourseList';
 import CreateCourse from './pages/CreateCourse';
 import EditCourse from './pages/EditCourse';
 import CourseDetailView from './pages/CourseDetailView';
+import PrivateRoute from '../src/utills/PrivateRoute'; 
+import Notfound from './component/Notfound';
+import Header from './component/Header'; // Import Header component
 const App = () => {
   return (
-    <Router>
-      
-        
-        <Routes>  
-          <Route path="/" element={<Home />} /> 
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/user-type" element={<UserTypeSelection />} />
-          <Route path="/callback" element={<Callback />} />
-          <Route path="/course" element={<CourseList />} />
-          <Route path="/create-course" element={<CreateCourse />} />
-          <Route path="/edit-course/:id" element={<EditCourse />} />
-          <Route path="/course-details/:id" element={<CourseDetailView />} />
-        </Routes>
-      
+<Router>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/callback" element={<Callback />} />
+        <Route path="/header" element={<Header />} />
+
+        {/* Protected Routes */}
+        <Route
+          path="/user-type"
+          element={<PrivateRoute element={<UserTypeSelection />} />}
+        />
+        <Route
+          path="/course"
+          element={<PrivateRoute element={<CourseList />} />}
+        />
+        <Route
+          path="/create-course"
+          element={<PrivateRoute element={<CreateCourse />} />}
+        />
+        <Route
+          path="/edit-course/:id"
+          element={<PrivateRoute element={<EditCourse />} />}
+        />
+        <Route
+          path="/course-details/:id"
+          element={<PrivateRoute element={<CourseDetailView />} />}
+        />
+        <Route path="*" element={<Notfound />} />
+      </Routes>
     </Router>
   );
 };
