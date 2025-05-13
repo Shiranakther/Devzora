@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Header from '../component/Header';
 import { FaBookOpen, FaRegCommentDots } from "react-icons/fa";
 import { MdAssignment, MdPostAdd } from "react-icons/md";
 import { FaArrowRight } from "react-icons/fa";
-import '../css/course/Homepage.css'; // Assuming you have some CSS for styling
-import Footer from '../component/Footer'; // Assuming you have a Footer component
+import '../css/course/Homepage.css'; 
+import Header from '../component/Header';
+import Footer from '../component/Footer'; 
 const Home = () => {
   const [user, setUser] = useState(null);
   const [role, setRole] = useState(null);
@@ -89,6 +89,7 @@ const Home = () => {
 
   return (
     <>
+    <Header/>
     <div className="explorer-wrapper">
         <div className="explorer-wrapper-title">
           Learn, Explore, and Grow with Devzora
@@ -205,7 +206,7 @@ const Home = () => {
       )}
     </div> */}
 
-    
+    <Footer />
     </>
   );
 };

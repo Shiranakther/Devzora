@@ -340,6 +340,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../css/course/CourseForm.css";
+import Header from '../component/Header';
+import Footer from '../component/Footer'; 
 
 const CourseForm = ({ onSubmit, course = {} }) => {
   const [formData, setFormData] = useState({
@@ -465,6 +467,8 @@ const CourseForm = ({ onSubmit, course = {} }) => {
   };
 
   return (
+    <>
+    <Header />
     <form onSubmit={handleSubmit} className="form-container">
       <input name="title" value={formData.title} onChange={handleChange} placeholder="Course Title" className="input-field" />
       <input name="shortDescription" value={formData.shortDescription} onChange={handleChange} placeholder="Short Description" className="input-field" />
@@ -522,6 +526,8 @@ const CourseForm = ({ onSubmit, course = {} }) => {
       <button type="button" onClick={addModule} className="button-secondary">Add Module</button>
       <button type="submit" className="button-submit">Save Course</button>
     </form>
+    <Footer />
+    </>
   );
 };
 

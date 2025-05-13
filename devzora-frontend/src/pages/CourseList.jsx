@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../css/course/CourseList.css';
+import Header from '../component/Header';
+import Footer from '../component/Footer';
 
 const CourseList = () => {
   const [courses, setCourses] = useState([]);
@@ -56,6 +58,9 @@ const CourseList = () => {
   );
 
   return (
+    <>
+    <Header />
+
     <div className="course-list-container">
       <div className="course-list-header">
         <h2>All Courses</h2>
@@ -93,6 +98,8 @@ const CourseList = () => {
         ))}
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 
