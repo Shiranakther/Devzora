@@ -89,7 +89,6 @@ const Home = () => {
 
   return (
     <>
-    <Header />
     <div className="explorer-wrapper">
         <div className="explorer-wrapper-title">
           Learn, Explore, and Grow with Devzora
@@ -190,7 +189,7 @@ const Home = () => {
           <button className="course-navigate-section-button">Get Started Now</button>
       </div>
 
-      <Footer />
+     
      
 
  {/* <div style={styles.container}>
