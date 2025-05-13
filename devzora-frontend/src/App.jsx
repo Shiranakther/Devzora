@@ -13,16 +13,20 @@ import CourseDetailView from './pages/CourseDetailView';
 import PrivateRoute from '../src/utills/PrivateRoute'; 
 import Notfound from './component/Notfound';
 import Header from './component/Header'; // Import Header component
+import Footer from './component/Footer'; // Import Footer component
 const App = () => {
   return (
-<Router>
+    <>
+    
+    <Router>
+      <Header />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/callback" element={<Callback />} />
-        <Route path="/header" element={<Header />} />
+       
 
         {/* Protected Routes */}
         <Route
@@ -47,7 +51,10 @@ const App = () => {
         />
         <Route path="*" element={<Notfound />} />
       </Routes>
+       <Footer />
     </Router>
+    </>
+
   );
 };
 

@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { FiLogOut } from 'react-icons/fi';
-
+import { Navigate } from 'react-router-dom';
 export default function Header() {
+  
 
      const [activeButton, setActiveButton] = useState('home');
      const [user, setUser] = useState(null);
@@ -83,7 +84,11 @@ export default function Header() {
 
         <button
           className={`header-button ${activeButton === 'home' ? 'highlight' : 'header-button'}`}
-          onClick={() => handleButtonClick('home')}
+          onClick={() => {
+            handleButtonClick('home');
+            navigate('/');
+          }}
+          
         >
           Home
         </button>
@@ -95,7 +100,11 @@ export default function Header() {
         </button>
         <button
           className={`header-button ${activeButton === 'courses' ? 'highlight' : 'header-button'}`}
-          onClick={() => handleButtonClick('courses')}
+          onClick={() => {
+            handleButtonClick('courses');
+            navigate('/course');
+          }}
+         
         >
           Courses
         </button>
