@@ -145,6 +145,39 @@
   .button-danger:hover {
     background-color: #c82333;
   }
+
+  .course-form-title{
+    margin-left: 2px;;
+    
+  }
+  .course-form-wrapper{
+    
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+
+  }
+.input-field{
+    font-size: 0.9rem;
+}
+.course-creation-header-title1{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.course-creation-header-title2{
+  margin-top: 5px;
+ color:#6c757d;
+  font-size: 1rem;
+  font-weight: 100;
+}
+.course-creation-header-title3{
+  text-align: center;
+  margin-top: 5px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  COLOR: #5d5d5d;
+}
+  
   
   /* Responsive Adjustments */
   @media screen and (max-width: 768px) {

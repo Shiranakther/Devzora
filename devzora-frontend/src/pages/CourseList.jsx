@@ -81,7 +81,7 @@ const CourseList = () => {
       <div className="course-cards-container">
         {filteredCourses.map(course => (
           <div key={course.id} className="course-card">
-            <img src={'https://www.finoit.com/wp-content/uploads/2022/09/java-coding-best-practices.jpg'} alt={course.title} className="course-image" />
+            <img src={course.thumbnailUrl} alt={course.title} className="course-image" />
             <div className="course-details">
               <h3>{course.title}</h3>
               <p>{course.shortDescription}</p>
