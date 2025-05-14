@@ -75,7 +75,7 @@ const CourseDetailView = () => {
         <div className="course-main">
           <div className="course-intro">
             <img
-              src="https://online.stanford.edu/sites/default/files/styles/widescreen_tiny/public/2018-03/cs_programminglanguage_cs242.jpg?h=66807ab2&itok=AAMwVPxF"
+              src={course.thumbnailUrl}
               alt="Course Thumbnail"
               className="course-thumbnail"
             />

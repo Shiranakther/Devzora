@@ -25,13 +25,10 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/callback" element={<Callback />} />
-       
+        <Route path="/user-type" element={<UserTypeSelection />} />
 
         {/* Protected Routes */}
-        <Route
-          path="/user-type"
-          element={<PrivateRoute element={<UserTypeSelection />} />}
-        />
+        
         <Route
           path="/course"
           element={<PrivateRoute element={<CourseList />} />}
