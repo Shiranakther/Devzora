@@ -148,9 +148,13 @@ export default function Header() {
           <button className="dropdown-item" onClick={() => console.log("Go to Dashboard")}>
             Profile
           </button>
-          <button className="dropdown-item" onClick={() => console.log("Go to Dashboard")}>
+          <button 
+            className="dropdown-item" 
+            onClick={() => navigate('/dashboard')}
+          >
             Dashboard
           </button>
+
           <button className="dropdown-item" onClick={handleLogout}>
             Logout <FiLogOut className='dropdown-item-icon' />
           </button>

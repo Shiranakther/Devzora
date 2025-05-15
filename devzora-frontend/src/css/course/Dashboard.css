@@ -1,0 +1,74 @@
+.dashboard-container {
+  display: flex;
+}
+
+.dashboard-sidebar {
+  width: 250px;
+  background-color: #2e2e2e;
+  padding: 20px;
+  display:flex;
+  flex-direction: column;
+  gap:20px;
+  height: 100vh;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 20px;
+}
+.header-logo{
+  margin-bottom: 25px;
+}
+.header-logo-span3{
+  color:white;
+}
+.dashboard-sidebar button{
+  position: relative;
+  display:flex;
+  flex-direction: row;
+  gap:10px;
+  align-items: center;
+  padding-left: 5px;
+  padding-right: 10px;
+  background-color: transparent;
+  border: none;
+  border-radius:5px;
+  color:#f0f0f0;
+  height:35px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.dashboard-sidebar button:hover{
+  background-color: rgba(255, 255, 255, 0.114);
+}
+.dashboard-primary-button{
+  background-color: rgba(19, 136, 232, 0.275) !important;
+  
+}
+.dashboard-dropdown-container{
+  position: absolute;
+  right: 20px;
+}
+.dashboard-icon{
+  font-size: 25px;
+}
+.dashboard-dropdown{
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+  
+  color:white;
+  font-size: 0.8rem;
+  font-weight: 100;
+}
+.dashboard-dropdown-option{
+  padding:5px 5px 5px 10px;
+  border-radius:5px;
+  cursor: pointer;
+  
+}
+.dashboard-dropdown-option:hover{
+  background-color: rgba(255, 255, 255, 0.114);
+
+}

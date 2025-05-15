@@ -1,5 +1,6 @@
 import React from 'react';
 import CourseForm from '../component/CourseForm';
+import Dashboard from '../component/Dashboard';
 
 const CreateCourse = () => {
   const handleCreate = async (course) => {
@@ -14,7 +15,12 @@ const CreateCourse = () => {
     });
   };
 
-  return <CourseForm onSubmit={handleCreate} />;
+  return (
+    <Dashboard>
+       <CourseForm onSubmit={handleCreate} />
+    </Dashboard>
+   
+  );
 };
 
 export default CreateCourse;
