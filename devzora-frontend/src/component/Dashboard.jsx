@@ -74,7 +74,16 @@ export default function Dashboard({ children }) {
         </button>
         {showCourses && (
           <div className="dashboard-dropdown">
-            <div className='dashboard-dropdown-option'>My Cources</div>
+            <div className='dashboard-dropdown-option'
+              onClick={() => {
+                navigate('/my-courses');
+              }}
+            >Purchased Cources</div>
+            <div className='dashboard-dropdown-option'
+            onClick={() => {
+                navigate('/create-course');
+              }}
+            >Create Course</div>
             <div className='dashboard-dropdown-option'>Manage Course</div>
             <div className='dashboard-dropdown-option'>Enrolment Details</div>
           </div>

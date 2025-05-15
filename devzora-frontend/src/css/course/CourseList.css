@@ -1,7 +1,8 @@
 /* CourseList.css */
 
 .course-list-container {
-    padding: 40px;
+    
+    margin: 20px 30px;
   }
   
   h2 {
@@ -155,4 +156,71 @@
       border-radius: 8px;
     }
     
-    /* CourseDetailView.css */
+   .course-card-course-details-title{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    font-size: 1rem;
+    font-weight: 600;
+   }
+   .course-card-course-details-level{
+    background-color: #0d76e51a;
+    color:#0056b3;
+    font-size: 0.7rem;
+    padding: 1px 3px;
+    border-radius:20px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 110px;
+    height:20px;
+   }
+   .course-card-course-details-instructor-name{
+    font-size: 0.9rem;
+    color:#0056b3;  
+    margin-top: 5px;;
+    margin-bottom: 10px;
+   }
+   .course-card-course-details-price{
+    font-size: 1.2rem;
+    margin-top: 10px;
+    margin-bottom: 10px;;
+    font-weight: bold;
+   }
+   .course-card-course-details{
+    font-size: 0.9rem;
+    color: #383838;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+   }
+   .course-card-course-details-langdue{
+    font-size: 0.9rem;
+    color:#333333;
+    margin-top: 5px;
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    margin: 10px 0px;
+   }
+   .course-enroll-button{
+    background-color: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.3s;
+    width: 80%;
+    height: 30px;
+   }
+   .course-list-container-title{
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 40px;
+    
+    text-align: center;
+   }
