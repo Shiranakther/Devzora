@@ -69,9 +69,12 @@
   .module-block {
     margin-bottom: 1.5rem;
     padding: 1rem;
-    background-color: #f0f4ff;
-    border-left: 4px solid #4a90e2;
+    background-color: rgb(243 244 246 );
+    
     border-radius: 8px;
+  }
+    .module-block:hover {
+    background-color: rgb(230, 230, 230);
   }
   
   .module-block h3 {
@@ -79,9 +82,8 @@
   }
   
   .lesson-block {
-    padding: 0.5rem 0 0.5rem 1rem;
-    border-left: 2px dashed #4a90e2;
-    margin-bottom: 0.8rem;
+    padding:5px;
+    margin-bottom: 1.5rem;
   }
   
   .lesson-block h4 {
@@ -180,7 +182,8 @@
   }
   .course-details-header-tags{
     display: flex;
-    flex-direction:row;
+    flex-direction:row; 
+    padding: 3px 5px;
     gap: 10px;
   }
   .course-details-header-tags button{
@@ -294,4 +297,88 @@
 
 .buy-button:hover {
   background-color: #1d3557;
+}
+
+.introduction-video{
+  margin-top:30px;
+  border-radius:10px;
+}
+
+.introduction-video video{
+  border-radius:10px;
+}
+.introduction-video-title{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1d3557;
+  margin-bottom: 20px;
+}
+.module-block-title{
+  display :flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  font-size: 1rem;
+}
+.module-number-index{
+  background-color: rgb(37 99 235);
+  
+  color:white;
+  width:30px;
+  height:30px;
+  padding:10px;
+  border-radius:100%;
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+.module-block-lession-intro{
+  display:flex;
+  flex-direction:column;
+}
+.module-block-lession-intro-main-title{
+  display:flex;
+  flex-direction:row;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: rgb(19, 19, 19);
+  margin-bottom: 5px;
+  
+ 
+}
+.lession-wrapper-container{
+  
+  background-color: white;
+  margin-top: 10px;
+}
+.lession-block-lession{
+  display:flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 5px 10px 20px 10px;
+  background-color: rgb(219 234 254);
+  padding: 5px 10px;
+  border-left:5px solid rgb(59 130 246);
+}
+.lession-block-lession:hover{
+ background-color: rgb(190, 218, 255);
+ cursor: pointer;
+}
+.lesson-block-lession-info-title{
+  font-size: 0.9rem;
+  font-weight: 400;
+  color:#4b4b4b;
+
+}
+.lesson-block-lession-info{
+  font-size: 0.9rem;
+  font-weight: 200;
+  color:rgb(75 85 99);
+}
+.lesson-video{
+  margin: 5px 10px 20px 10px;
 }
