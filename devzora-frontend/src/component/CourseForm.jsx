@@ -497,8 +497,8 @@ const CourseForm = ({ onSubmit, course = {} }) => {
 
   return (
     <>
-    <Header />
-    <form onSubmit={handleSubmit} className="form-container">
+    
+<form onSubmit={handleSubmit} className="form-container">
 
 <div className="course-creation-header-title1">Create Course
 

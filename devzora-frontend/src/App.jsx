@@ -12,6 +12,8 @@ import EditCourse from './pages/EditCourse';
 import CourseDetailView from './pages/CourseDetailView';
 import PrivateRoute from '../src/utills/PrivateRoute'; 
 import Notfound from './component/Notfound';
+import Dashboard from './component/Dashboard';
+import UserProfile from './pages/UserProfile';
 
 const App = () => {
   return (
@@ -26,6 +28,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/callback" element={<Callback />} />
         <Route path="/user-type" element={<UserTypeSelection />} />
+         <Route path="/dashboard" element={<Dashboard />} />
 
         {/* Protected Routes */}
         
@@ -44,6 +47,10 @@ const App = () => {
         <Route
           path="/course-details/:id"
           element={<PrivateRoute element={<CourseDetailView />} />}
+        />
+         <Route
+          path="/profile"
+          element={<PrivateRoute element={<UserProfile />} />}
         />
         <Route path="*" element={<Notfound />} />
       </Routes>
