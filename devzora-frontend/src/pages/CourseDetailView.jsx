@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import '../css/course/CourseDetailView.css';
+import Header from '../component/Header';
+import Footer from '../component/Footer';
+
 import {
   FaStar,
   FaClock,
@@ -8,6 +11,7 @@ import {
   FaUsers,
   FaCalendarAlt
 } from "react-icons/fa";
+
 
 const CourseDetailView = () => {
   const { id } = useParams();
@@ -36,6 +40,8 @@ const CourseDetailView = () => {
 
   return (
     <>
+    <Header/>
+
       <div className="course-details-header">
         <div className="course-details-header-container">
           <div className="course-details-header-tags">
@@ -104,7 +110,7 @@ const CourseDetailView = () => {
                     <p><strong>Type:</strong> {lesson.type}</p>
                     <p><strong>Duration:</strong> {lesson.durationMinutes} mins</p>
 
-                    {/* ✅ Embed actual video */}
+                    
                     <div className="lesson-video">
                       <strong>Video:</strong>
                       <video width="100%" height="auto" controls>
@@ -139,6 +145,7 @@ const CourseDetailView = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

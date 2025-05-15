@@ -20,7 +20,7 @@ export default function Header() {
     const fetchUserProfile = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:8080/me", {
+        const response = await axios.get("http://localhost:8080/user/me", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

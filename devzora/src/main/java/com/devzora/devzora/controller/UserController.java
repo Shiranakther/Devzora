@@ -1,7 +1,7 @@
 package com.devzora.devzora.controller;
 
 import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.devzora.devzora.model.Users;
 import com.devzora.devzora.service.UserService;
@@ -20,7 +20,7 @@ import org.springframework.security.core.Authentication;
 
 
 @RestController
-// @RequestMapping("/user")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired

@@ -39,7 +39,9 @@ font-weight: 200;
 .header-logo{
     font-size: 1.6rem;
     color:#0080ff;
-    font-weight: bold;;
+    font-weight: bold;
+    
+    
 }
 .header-logo-span2{
     color: rgb(74, 74, 74);
