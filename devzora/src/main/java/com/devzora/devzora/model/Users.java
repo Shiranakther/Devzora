@@ -28,6 +28,7 @@ public class Users {
     private String name; 
     private String email;  // Optional: Store user's email
     private String phone;
+    private String profilePictureUrl;
     private List<String> roles;
 
 

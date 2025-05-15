@@ -4,15 +4,38 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { FiLogOut } from 'react-icons/fi';
+import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 export default function Header() {
   
 
      const [activeButton, setActiveButton] = useState('home');
      const [user, setUser] = useState(null);
+     const [formData, setFormData] = useState({});
       const navigate = useNavigate();
 
        const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+         useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get("http://localhost:8080/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setUser(response.data);
+        setFormData(response.data); // initialize edit state
+      } catch (err) {
+        console.error(err);
+        setError("Could not fetch user profile.");
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
 
         const toggleDropdown = () => {
             setIsDropdownOpen((prev) => !prev);
@@ -134,7 +157,8 @@ export default function Header() {
         </button>
       </div>
       <div className="header-profile" onClick={toggleDropdown}>
-        <img src="https://cdn-icons-png.flaticon.com/512/4128/4128244.png" alt="Profile" className='header-profile-img' />
+       <img src={formData.profilePictureUrl ? formData.profilePictureUrl : "https://static.vecteezy.com/system/resources/previews/021/548/095/non_2x/default-profile-picture-avatar-user-avatar-icon-person-icon-head-icon-profile-picture-icons-default-anonymous-user-male-and-female-businessman-photo-placeholder-social-network-avatar-portrait-free-vector.jpg"} alt="Profile" className='header-profile-img' />
+        
         <div className="header-profile-name">
             {user ? (
                 <>{user.name ? user.name : user.sub}</>
@@ -145,7 +169,9 @@ export default function Header() {
 
             {isDropdownOpen && user && (
         <div className="dropdown-menu">
-          <button className="dropdown-item" onClick={() => console.log("Go to Dashboard")}>
+          <button className="dropdown-item" onClick={
+            ()=>navigate('/profile')
+          }>
             Profile
           </button>
           <button 

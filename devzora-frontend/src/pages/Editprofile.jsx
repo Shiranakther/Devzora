@@ -1,10 +1,12 @@
+
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../css/course/userComponet/UserDetails.css";
 import Dashboard from "../component/Dashboard";
 import { FiUpload } from 'react-icons/fi';
 
-const UserProfile = () => {
+const Editprofile = () => {
   const [user, setUser] = useState(null);
   const [formData, setFormData] = useState({});
   const [error, setError] = useState("");
@@ -121,9 +123,9 @@ const UserProfile = () => {
               
               alt="Profile"
             />
-            {/* <label htmlFor="profile-upload" className="upload-btn-custom">
+            <label htmlFor="profile-upload" className="upload-btn-custom">
  <FiUpload style={{ color:'white' ,fontSize:'20px',marginRight:'10px'}} />  Upload
-</label> */}
+</label>
 <input
   type="file"
   id="profile-upload"
@@ -195,7 +197,7 @@ const UserProfile = () => {
               <div className="user-detail-info-value">{user.roles.join(", ")}</div>
             </div>
 
-            {/* <div className="user-action-buttons">
+            <div className="user-action-buttons">
               {isEditing ? (
                 <>
                   <button onClick={handleUpdate}>Save</button>
@@ -208,7 +210,7 @@ const UserProfile = () => {
               <button onClick={handleDelete} className="delete-btn">
                 Delete Account
               </button>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
@@ -216,4 +218,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default Editprofile;
