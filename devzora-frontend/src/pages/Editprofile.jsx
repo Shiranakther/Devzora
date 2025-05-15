@@ -16,7 +16,7 @@ const Editprofile = () => {
     const fetchUserProfile = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:8080/me", {
+        const response = await axios.get("http://localhost:8080/user/me", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -74,7 +74,7 @@ const Editprofile = () => {
   const handleUpdate = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put("http://localhost:8080/update", formData, {
+      await axios.put("http://localhost:8080/user/update", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -95,7 +95,7 @@ const Editprofile = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete("http://localhost:8080/delete", {
+      await axios.delete("http://localhost:8080/user/delete", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
