@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api/videos")
 public class VideoUploadController {
 @Autowired
-    private VideoUploadService videoUploadService;
+private VideoUploadService videoUploadService;
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadVideo(@RequestParam("file") MultipartFile file) {
