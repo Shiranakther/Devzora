@@ -74,5 +74,19 @@ public class UserService {
         return repo.findByUsername(username);
     }
     
+     public Users updateUser(Users user) {
+        return repo.save(user);
+    }
+
+    
+    public boolean deleteByUsername(String username) {
+        Users user = repo.findByUsername(username);
+        if (user != null) {
+            repo.delete(user);
+            return true;
+        }
+        return false;
+    }
+    
     
 }

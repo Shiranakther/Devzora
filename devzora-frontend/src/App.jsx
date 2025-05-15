@@ -14,6 +14,7 @@ import PrivateRoute from '../src/utills/PrivateRoute';
 import Notfound from './component/Notfound';
 import Dashboard from './component/Dashboard';
 import UserProfile from './pages/UserProfile';
+import Editprofile from './pages/Editprofile';
 
 const App = () => {
   return (
@@ -51,6 +52,10 @@ const App = () => {
          <Route
           path="/profile"
           element={<PrivateRoute element={<UserProfile />} />}
+        />
+         <Route
+          path="/edit-profile"
+          element={<PrivateRoute element={<Editprofile />} />}
         />
         <Route path="*" element={<Notfound />} />
       </Routes>

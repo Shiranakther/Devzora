@@ -56,7 +56,11 @@ export default function Dashboard({ children }) {
                 navigate('/profile');
               }}
             > View Profile</div>
-            <div className='dashboard-dropdown-option'> Edit Info</div>
+            <div className='dashboard-dropdown-option'
+             onClick={() => {
+                navigate('/edit-profile');
+              }}
+            > Edit Info</div>
           </div>
         )}
 

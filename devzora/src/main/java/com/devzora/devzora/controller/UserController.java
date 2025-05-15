@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Authentication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.security.core.Authentication;
 
 
@@ -56,7 +58,38 @@ public class UserController {
                 return ResponseEntity.ok(user);
             }
 
-        
+        @PutMapping("/update")
+    public ResponseEntity<?> updateUser(@RequestBody Users updatedUser, Authentication authentication) {
+        String username = authentication.getName();
+        Users user = service.findByUsername(username);
 
+        if (user == null) {
+            return ResponseEntity.status(404).body("User not found");
+        }
 
+        user.setName(updatedUser.getName());
+        user.setEmail(updatedUser.getEmail());
+        user.setPhone(updatedUser.getPhone());
+        user.setProfilePictureUrl(updatedUser.getProfilePictureUrl());
+
+        Users savedUser = service.updateUser(user);
+        savedUser.setPassword(null); // hide password again
+        return ResponseEntity.ok(savedUser);
+    }
+
+    
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteUser(Authentication authentication) {
+        String username = authentication.getName();
+        boolean deleted = service.deleteByUsername(username);
+
+        if (!deleted) {
+            return ResponseEntity.status(404).body("User not found");
+        }
+
+        return ResponseEntity.ok("User deleted successfully.");
+    }
 }
+
+
+
