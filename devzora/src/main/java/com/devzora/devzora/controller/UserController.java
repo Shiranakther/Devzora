@@ -71,7 +71,7 @@ public class UserController {
         user.setEmail(updatedUser.getEmail());
         user.setPhone(updatedUser.getPhone());
         user.setProfilePictureUrl(updatedUser.getProfilePictureUrl());
-
+        user.setPurchasedCourses(updatedUser.getPurchasedCourses());
         Users savedUser = service.updateUser(user);
         savedUser.setPassword(null); // hide password again
         return ResponseEntity.ok(savedUser);

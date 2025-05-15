@@ -661,7 +661,7 @@ const CourseForm = ({ onSubmit, course = {} }) => {
       <button type="button" onClick={addModule} className="button-secondary">Add Module</button>
       <button type="submit" className="button-submit">Create Course</button>
     </form>
-    <Footer />
+    
     </>
   );
 };

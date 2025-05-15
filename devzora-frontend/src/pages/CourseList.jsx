@@ -57,15 +57,26 @@ const CourseList = () => {
     course.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+
+   const formatDuration = (minutes) => {
+    const hrs = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+
+    if (hrs && mins) return `${hrs} hr${hrs > 1 ? 's' : ''} ${mins} min${mins > 1 ? 's' : ''}`;
+    if (hrs) return `${hrs} hr${hrs > 1 ? 's' : ''}`;
+    return `${mins} min${mins > 1 ? 's' : ''}`;
+  };
+
+
   return (
     <>
     <Header />
 
     <div className="course-list-container">
-      <div className="course-list-header">
-        <h2>All Courses</h2>
-        <Link to="/create-course" className="create-course-link">Create New Course</Link>
-      </div>
+      
+        <div className='course-list-container-title'>All Courses</div>
+        {/* <Link to="/create-course" className="create-course-link">Create New Course</Link> */}
+    
 
       
       <div className="search-bar-container">
@@ -83,11 +94,18 @@ const CourseList = () => {
           <div key={course.id} className="course-card">
             <img src={course.thumbnailUrl} alt={course.title} className="course-image" />
             <div className="course-details">
-              <h3>{course.title}</h3>
-              <p>{course.shortDescription}</p>
-              <p><strong>Category:</strong> {course.category}</p>
-              <p><strong>Lang:</strong> {course.language}</p>
-              <p><strong>Price:</strong> {course.isPaid ? `${course.price}` : 'Free'}</p>
+              <div className='course-card-course-details-title'>{course.title} <div className="course-card-course-details-level">{course.level}</div></div>
+              <div className="course-card-course-details-instructor-name">by Abu philip</div>
+              <div className='course-card-course-details'>{course.shortDescription}</div>
+              <div className='course-card-course-details'><strong>Category:</strong> {course.category}</div>
+              <div className='course-card-course-details-langdue'>
+                <div><strong>Language:</strong> {course.language} </div>
+                <div> | </div>
+                <div><strong>Duration:</strong>{formatDuration(course.estimatedDurationMinutes)}</div>
+                
+                
+                </div>
+              <div className='course-card-course-details-price'> $ {course.isPaid ? `${course.price}` : 'Free'}</div>
               <div className="course-actions">
                 <Link to={`/edit-course/${course.id}`} className="edit-link">Edit</Link>
                 <button onClick={() => handleDelete(course.id)} className="delete-button">Delete</button>

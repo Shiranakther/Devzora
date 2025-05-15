@@ -30,6 +30,7 @@ public class Users {
     private String phone;
     private String profilePictureUrl;
     private List<String> roles;
+    private List<String> purchasedCourses;
 
 
 }

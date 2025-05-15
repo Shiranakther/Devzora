@@ -15,6 +15,8 @@ import Notfound from './component/Notfound';
 import Dashboard from './component/Dashboard';
 import UserProfile from './pages/UserProfile';
 import Editprofile from './pages/Editprofile';
+import PaymentSuccess from './pages/PaymentSuccess';
+import MyCourses from './pages/MyCourses';
 
 const App = () => {
   return (
@@ -56,6 +58,15 @@ const App = () => {
          <Route
           path="/edit-profile"
           element={<PrivateRoute element={<Editprofile />} />}
+        />
+        <Route
+          path="/my-courses"
+          element={<PrivateRoute element={<MyCourses />} />}
+        />
+        
+        <Route
+          path="/payment-success"
+          element={<PrivateRoute element={<PaymentSuccess/>} />}
         />
         <Route path="*" element={<Notfound />} />
       </Routes>

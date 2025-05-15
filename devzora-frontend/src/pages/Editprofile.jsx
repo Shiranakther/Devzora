@@ -52,7 +52,6 @@ const Editprofile = () => {
       );
 
       const imageUrl = res.data;
-
       setFormData((prev) => ({
         ...prev,
         profilePictureUrl: imageUrl,

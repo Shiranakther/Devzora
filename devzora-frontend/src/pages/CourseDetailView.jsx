@@ -61,6 +61,30 @@ import {
 
   if (!course) return <div>Loading...</div>;
 
+    const handleBuyNow = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:8080/api/payment/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          courseId: course.id,
+          title: course.title,
+          price: course.price
+        })
+      });
+
+      const sessionUrl = await response.text();  // Your backend returns the Stripe session URL as plain text
+      window.location.href = sessionUrl;  // Redirect user to Stripe checkout
+
+    } catch (error) {
+      console.error('Failed to create checkout session:', error);
+    }
+  };
+
 
 
   return (
@@ -76,6 +100,7 @@ import {
           </div>
 
           <div className="course-details-header-title">{course.title}</div>
+         
           <div className="course-details-header-description">{course.shortDescription}</div>
           <div className="course-details-header-status">
             <div className="detail-item rating">
@@ -203,7 +228,7 @@ import {
                 <li>Share this course</li>
               </ul>
             </div>
-            <button className="buy-button">Buy Now</button>
+            <button className="buy-button" onClick={handleBuyNow}>Buy Now</button>
           </div>
         </div>
       </div>
