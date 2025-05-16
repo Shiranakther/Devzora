@@ -43,38 +43,78 @@ const Register = () => {
     return '';
   };
 
+  // const handleRegister = async (e) => {
+  //   e.preventDefault();
+  //   const validationError = validateForm();
+  //   if (validationError) {
+  //     setError(validationError);
+  //     return;
+  //   }
+
+  //   setError('');
+  //   setLoading(true);
+  //   try {
+  //     const response = await fetch('http://localhost:8080/user/register', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(form),
+  //     });
+
+  //     if (response.ok) {
+  //       navigate('/login');
+  //     } else {
+  //       const message = await response.text();
+  //       if (message.includes("User already exists")) {
+  //         setError("User already exists. Try logging in.");
+  //       } else if (message.includes('Username already exists')) {
+  //     setError('That username is already taken!');
+  //   } else if (message.includes('Email already exists')) {
+  //     setError('That email is already registered!');
+  //   } else {
+  //     setError('Something went wrong. Please try again.');
+  //   }}} catch (err) {
+  //     console.error('Registration error:', err);
+  //     setError('Something went wrong. Please try again later.');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleRegister = async (e) => {
-    e.preventDefault();
-    const validationError = validateForm();
-    if (validationError) {
-      setError(validationError);
-      return;
-    }
+  e.preventDefault();
 
-    setError('');
-    setLoading(true);
-    try {
-      const response = await fetch('http://localhost:8080/user/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(form),
-      });
+  const validationError = validateForm();
+  if (validationError) {
+    setError(validationError);
+    return;
+  }
 
-      if (response.ok) {
-        navigate('/login');
-      } else {
-        const message = await response.text();
-        setError(message || 'Registration failed');
-      }
-    } catch (err) {
-      console.error('Registration error:', err);
-      setError('Something went wrong. Please try again later.');
-    } finally {
-      setLoading(false);
+  setError('');
+  setLoading(true);
+
+  try {
+    const response = await fetch('http://localhost:8080/user/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form),
+    });
+
+    if (response.ok) {
+      navigate('/login');
+    } else {
+      const data = await response.json();
+      setError(data.error || 'Something went wrong.');
     }
-  };
+  } catch (err) {
+    console.error("Register failed:", err);
+    setError("Server error. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const handleOAuthRegister = () => {
     window.location.href = 'http://localhost:8080/oauth2/authorization/google';

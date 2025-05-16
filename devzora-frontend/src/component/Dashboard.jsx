@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import '../css/course/Dashboard.css';
 import { useNavigate } from 'react-router-dom';
 import { FaChevronRight, FaChevronDown } from 'react-icons/fa';
+import { useEffect   } from 'react';
+import axios from 'axios';
 import {
   MdHome,
   MdPerson,
@@ -20,11 +22,37 @@ export default function Dashboard({ children }) {
   const navigate = useNavigate();
   const [showCourses, setShowCourses] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+  const [user, setUser] = useState(null);
+    const [formData, setFormData] = useState({});
+    const [error, setError] = useState("");
 
       const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/login');
   };
+
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get("http://localhost:8080/user/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setUser(response.data);
+        setFormData(response.data); // initialize edit state
+      } catch (err) {
+        console.error(err);
+        setError("Could not fetch user profile.");
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
 
   return (
     <div className='dashboard-container'>
@@ -79,16 +107,20 @@ export default function Dashboard({ children }) {
                 navigate('/my-courses');
               }}
             >Purchased Cources</div>
+            {(user?.roles.includes('INSTRUCTOR') || user?.roles.includes('ADMIN')) && (
             <div className='dashboard-dropdown-option'
             onClick={() => {
                 navigate('/create-course');
               }}
             >Create Course</div>
+            )}
+            {(user?.roles.includes('INSTRUCTOR') || user?.roles.includes('ADMIN')) && (
             <div className='dashboard-dropdown-option'
             onClick={() => {
                 navigate('/manage-course');
               }}
             >Manage Course</div>
+            )}
             <div className='dashboard-dropdown-option'>Enrolment Details</div>
           </div>
         )}
