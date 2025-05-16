@@ -136,6 +136,8 @@ const ManageCourse = () => {
               <div className="course-actions">
                 <Link to={`/edit-course/${course.id}`} className="edit-link" style={{width:'80px',backgroundColor:'#0080ff'}}>Edit</Link>
                 <button onClick={() => handleDelete(course.id)} className="delete-button" style={{width:'80px'}}>Delete</button>
+
+                //navigate ishans page
                 <button  className="delete-button" style={{width:'80px',backgroundColor:'green'}}
                 onClick={
                     () => {
