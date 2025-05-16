@@ -4,7 +4,7 @@ import '../css/course/CourseDetailView.css';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
 import axios from 'axios';
-
+import { FaLock } from "react-icons/fa";
 
 import {
   FaStar,
@@ -77,12 +77,14 @@ import {
 
     const [openModules, setOpenModules] = useState({});
 
-      const toggleModule = (idx) => {
-        setOpenModules((prev) => ({
-          ...prev,
-          [idx]: !prev[idx], // toggle that specific module
-        }));
-      };
+    const toggleModule = (idx) => {
+      if (!hasPurchasedCourse()) return; 
+      setOpenModules((prev) => ({
+        ...prev,
+        [idx]: !prev[idx],
+      }));
+    };
+
 
 
   if (!course) return <div>Loading...</div>;
@@ -193,7 +195,7 @@ import {
               <h2>Modules</h2>
               {course.modules.map((mod, idx) => (
                 <div key={idx} className="module-block">
-                  <div className='module-block-title' 
+                  {/* <div className='module-block-title' 
                     onClick={() => toggleModule(idx)} 
                     style={{ cursor: "pointer", color: "#007bff" }}
                   >
@@ -213,9 +215,40 @@ import {
                     </div>
                     
                     
-                  </div>
+                  </div> */}
+
+                  <div className='module-block-title' 
+                        onClick={() => hasPurchasedCourse() && toggleModule(idx)} 
+                        style={{ 
+                          cursor: hasPurchasedCourse() ? "pointer" : "not-allowed", 
+                          color: hasPurchasedCourse() ? "#007bff" : "gray",
+                          position: "relative"
+                        }}
+                      >
+                        <div className="module-number-index">{idx+1}</div>
+
+                        <div className="module-block-lession-intro">
+                          <div className="module-block-lession-intro-main-title">
+                            {mod.title}
+                            {hasPurchasedCourse() ? (
+                              openModules[idx] 
+                              ? <FaChevronUp style={{ fontSize: '1.2rem', position:'absolute', right:'10px' }}/> 
+                              : <FaChevronDown style={{ fontSize: '1.2rem', position:'absolute', right:'10px' }}/>
+                            ) : (
+                              <span style={{ fontSize: '1rem', color: 'gray', position:'absolute', right:'10px' }}><FaLock style={{ marginLeft: "10px", color: "gray" }} /></span>
+                            )}
+                          </div>
+
+                          <span style={{ marginLeft: '0px', color: 'gray', fontSize: '0.9em' }}>
+                            {mod.lessons.length} {mod.lessons.length === 1 ? "lesson" : "lessons"}
+                          </span>
+                        </div>
+                      </div>
+
+
+
                     <div className="lession-wrapper-container">
-                  {!hasPurchasedCourse && openModules[idx] && (
+                  {hasPurchasedCourse && openModules[idx] && (
                     <div className="lessons-list">
                       {mod.lessons.map((lesson, lidx) => (
                         <div key={lidx} className="lesson-block">
@@ -246,20 +279,19 @@ import {
 {!hasPurchasedCourse() && (
         <div className="course-sidebar">
           <div className="price-box">
-            <h2 className="discounted-price">{course.price} <span className="original-price">$99.99</span></h2>
-            <p className="sale-info">20% off<br />Sale ends in 2 days!</p>
-            <p className="guarantee">30-Day Money-Back Guarantee</p>
-            <div className="includes">
-              <h4>This course includes:</h4>
-              <ul>
-                <li>6 hours of on-demand video</li>
-                <li>Downloadable resources and code examples</li>
-                <li>Interactive coding exercises and quizzes</li>
-                <li>Q&A support from instructor</li>
-                <li>Certificate of completion</li>
-                <li>Share this course</li>
-              </ul>
-            </div>
+<h2 className="course-details-view-buy__discounted-price">{course.price}$</h2>
+<p className="course-details-view-buy__guarantee">30-Day Money-Back Guarantee</p>
+           <div className="course-details-view-buy__includes">
+            <h4>This course includes:</h4>
+            <ul>
+              <li>{formatDuration(course.estimatedDurationMinutes)} hours of on-demand video</li>
+              <li>Downloadable resources and code examples</li>
+              <li>Interactive coding exercises and quizzes</li>
+              <li>Q&A support from instructor</li>
+              <li>Certificate of completion</li>
+              <li>Share this course</li>
+            </ul>
+          </div>
             <button className="buy-button" onClick={handleBuyNow}>Buy Now</button>
           </div>
         </div>)}
