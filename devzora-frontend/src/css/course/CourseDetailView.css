@@ -382,3 +382,79 @@
 .lesson-video{
   margin: 5px 10px 20px 10px;
 }
+
+/* buy */
+.course-details-view-buy__includes {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 20px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #007bff;
+}
+
+.course-details-view-buy__includes h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+  letter-spacing: 0.3px;
+  text-align: left;
+}
+
+.course-details-view-buy__includes ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display:flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.course-details-view-buy__includes li {
+  font-size: 1rem;
+  color: #333;
+  padding: 12px 0;
+  position: relative;
+  padding-left: 28px;
+  line-height: 1.5;
+}
+
+.course-details-view-buy__includes li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #28a745;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.course-details-view-buy__includes li:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .course-details-view-buy__includes {
+    padding: 16px;
+  }
+
+  .course-details-view-buy__includes h4 {
+    font-size: 1.3rem;
+  }
+
+  .course-details-view-buy__includes li {
+    font-size: 0.95rem;
+    padding: 10px 0 10px 24px;
+  }
+}
+
+.course-details-view-buy__discounted-price {
+    font-size: 1.75rem;
+    padding: 6px 12px;
+  }
+
+  .course-details-view-buy__guarantee {
+    font-size: 0.95rem;
+    color:green;
+    font-weight: 600;
+  }

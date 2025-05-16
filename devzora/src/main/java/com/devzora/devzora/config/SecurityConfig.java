@@ -52,6 +52,10 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("user/register", "user/login", "/","/oauth2/**","/login/oauth2/**","/api/videos/upload","/api/images/upload").permitAll()  // Allow these endpoints to be accessed without authentication
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")  // Only users with the "ADMIN" role can access these endpoints
+                .requestMatchers("/api/course/course-details/**").hasAnyRole("USER", "INSTRUCTOR", "ADMIN") // Allow both "INSTRUCTOR" and "ADMIN" roles
+                .requestMatchers("/api/course/create-course/**").hasAnyRole("INSTRUCTOR", "ADMIN")
+                .requestMatchers("/api/course/update-course/**").hasAnyRole("INSTRUCTOR", "ADMIN")
+                .requestMatchers("/api/course/delete-course/**").hasAnyRole("INSTRUCTOR", "ADMIN")
                 .requestMatchers("/api/instructor/**").hasAnyRole("INSTRUCTOR", "ADMIN") // Allow both "INSTRUCTOR" and "ADMIN" roles
                 .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN") // Allow "USER" and "ADMIN" roles
                 .anyRequest().authenticated()  // Require authentication for any other request
