@@ -18,5 +18,6 @@ public class Comment {
     private String id;
     private String content;
     private String postId;
+    private String userId; // Stores the ID of the user from the Users collection
     private LocalDateTime createdAt;
 }

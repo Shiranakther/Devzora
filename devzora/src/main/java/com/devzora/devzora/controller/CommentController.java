@@ -1,14 +1,13 @@
 package com.devzora.devzora.controller;
 
-
 import com.devzora.devzora.model.Comment;
+import com.devzora.devzora.model.Users;
 import com.devzora.devzora.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web
-
-.bind.annotation.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,15 +20,19 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping("/comments/create")
-    public ResponseEntity<Comment> createComment(@RequestBody CommentRequest commentRequest) {
+    public ResponseEntity<Comment> createComment(@RequestBody CommentRequest commentRequest, Authentication authentication) {
         try {
-            if (commentRequest.getPostId() == null || commentRequest.getContent() == null) {
+            if (commentRequest.getPostId() == null || commentRequest.getContent() == null || commentRequest.getContent().trim().isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-            Comment comment = commentService.createComment(commentRequest.getPostId(), commentRequest.getContent());
+            String username = authentication.getName();
+            Comment comment = commentService.createComment(commentRequest.getPostId(), commentRequest.getContent(), username);
             return new ResponseEntity<>(comment, HttpStatus.CREATED);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Post not found
+            if (e.getMessage().contains("Unauthorized")) {
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -45,27 +48,51 @@ public class CommentController {
         return new ResponseEntity<>(comments, HttpStatus.OK);
     }
 
-    @PutMapping("/comments/update/{commentId}")
-    public ResponseEntity<Comment> updateComment(
-            @PathVariable String commentId,
-            @RequestBody UpdateCommentRequest updateRequest) {
+    @GetMapping("/comments/user")
+    public ResponseEntity<List<Comment>> getCommentsByUser(Authentication authentication) {
         try {
-            if (updateRequest.getContent() == null || updateRequest.getContent().trim().isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            String username = authentication.getName();
+            Users user = commentService.getUserService().findByUsername(username);
+            if (user == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-            Comment updatedComment = commentService.updateComment(commentId, updateRequest.getContent());
-            return new ResponseEntity<>(updatedComment, HttpStatus.OK);
+            List<Comment> comments = commentService.getCommentsByUserId(user.getId());
+            return new ResponseEntity<>(comments, HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/comments/delete/{commentId}")
-    public ResponseEntity<Void> deleteComment(@PathVariable String commentId) {
+    @PutMapping("/comments/update/{commentId}")
+    public ResponseEntity<Comment> updateComment(
+            @PathVariable String commentId,
+            @RequestBody UpdateCommentRequest updateRequest,
+            Authentication authentication) {
         try {
-            commentService.deleteComment(commentId);
+            if (updateRequest.getContent() == null || updateRequest.getContent().trim().isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            String username = authentication.getName();
+            Comment updatedComment = commentService.updateComment(commentId, updateRequest.getContent(), username);
+            return new ResponseEntity<>(updatedComment, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            if (e.getMessage().contains("Unauthorized")) {
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/comments/delete/{commentId}")
+    public ResponseEntity<Void> deleteComment(@PathVariable String commentId, Authentication authentication) {
+        try {
+            String username = authentication.getName();
+            commentService.deleteComment(commentId, username);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (RuntimeException e) {
+            if (e.getMessage().contains("Unauthorized")) {
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            }
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -103,4 +130,3 @@ class UpdateCommentRequest {
         this.content = content;
     }
 }
-
