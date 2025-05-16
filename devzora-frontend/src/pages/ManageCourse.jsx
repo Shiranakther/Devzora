@@ -2,12 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../css/course/CourseList.css';
-import Header from '../component/Header';
-import Footer from '../component/Footer';
+import axios from 'axios';
+import Dashboard from '../component/Dashboard';
 
-const CourseList = () => {
+const ManageCourse = () => {
   const [courses, setCourses] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+    const [user, setUser] = useState(null);
+    const [formData, setFormData] = useState({});
+    const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleEnroll = (id) => {
@@ -35,6 +38,27 @@ const CourseList = () => {
     }
   };
 
+    useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get("http://localhost:8080/user/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setUser(response.data);
+        setFormData(response.data); // initialize edit state
+      } catch (err) {
+        console.error(err);
+        setError("Could not fetch user profile.");
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
   const handleDelete = async (id) => {
     const token = localStorage.getItem("token");
 
@@ -53,9 +77,12 @@ const CourseList = () => {
   }, []);
 
   // 🔍 Filter courses based on search
-  const filteredCourses = courses.filter(course =>
+  const filteredCourses = courses
+  .filter(course => course.userId === user?.id)
+  .filter(course =>
     course.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
 
 
    const formatDuration = (minutes) => {
@@ -70,8 +97,7 @@ const CourseList = () => {
 
   return (
     <>
-    <Header />
-
+    <Dashboard>
     <div className="course-list-container">
       
         <div className='course-list-container-title'>All Courses</div>
@@ -96,6 +122,7 @@ const CourseList = () => {
             <div className="course-details">
               <div className='course-card-course-details-title'>{course.title} <div className="course-card-course-details-level">{course.level}</div></div>
               <div className="course-card-course-details-instructor-name">by Abu philip</div>
+              
               <div className='course-card-course-details'>{course.shortDescription}</div>
               <div className='course-card-course-details'><strong>Category:</strong> {course.category}</div>
               <div className='course-card-course-details-langdue'>
@@ -107,18 +134,27 @@ const CourseList = () => {
                 </div>
               <div className='course-card-course-details-price'> $ {course.isPaid ? `${course.price}` : 'Free'}</div>
               <div className="course-actions">
-                {/* <Link to={`/edit-course/${course.id}`} className="edit-link">Edit</Link>
-                <button onClick={() => handleDelete(course.id)} className="delete-button">Delete</button> */}
-                <button className="enroll-button" onClick={() => handleEnroll(course.id)} style={{width:'150px'}}>View</button>
+                <Link to={`/edit-course/${course.id}`} className="edit-link" style={{width:'80px',backgroundColor:'#0080ff'}}>Edit</Link>
+                <button onClick={() => handleDelete(course.id)} className="delete-button" style={{width:'80px'}}>Delete</button>
+
+                {/* navigate ishans page */}
+
+                <button  className="delete-button" style={{width:'80px',backgroundColor:'green'}}
+                onClick={
+                    () => {
+                    navigate(`/teacher/assignments/${course.id}`)}}
+                >Add Tutorials</button>
+                
               </div>
             </div>
           </div>
         ))}
       </div>
     </div>
-    <Footer />
+    </Dashboard>
+
     </>
   );
 };
 
-export default CourseList;
+export default ManageCourse;

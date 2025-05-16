@@ -17,6 +17,7 @@ import UserProfile from './pages/UserProfile';
 import Editprofile from './pages/Editprofile';
 import PaymentSuccess from './pages/PaymentSuccess';
 import MyCourses from './pages/MyCourses';
+import ManageCourse from './pages/ManageCourse';
 
 const App = () => {
   return (
@@ -67,6 +68,10 @@ const App = () => {
         <Route
           path="/payment-success"
           element={<PrivateRoute element={<PaymentSuccess/>} />}
+        />
+        <Route
+          path="/manage-course"
+          element={<PrivateRoute element={<ManageCourse/>} />}
         />
         <Route path="*" element={<Notfound />} />
       </Routes>

@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import '../css/course/CourseDetailView.css';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
+import axios from 'axios';
+
 
 import {
   FaStar,
@@ -19,6 +21,9 @@ import {
   const CourseDetailView = () => {
     const { id } = useParams();
     const [course, setCourse] = useState(null);
+      const [user, setUser] = useState(null);
+      const [formData, setFormData] = useState({});
+      const [error, setError] = useState("");
 
     useEffect(() => {
       const fetchCourseDetails = async () => {
@@ -38,6 +43,27 @@ import {
 
       fetchCourseDetails();
     }, [id]);
+
+      useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get("http://localhost:8080/user/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setUser(response.data);
+        setFormData(response.data); // initialize edit state
+      } catch (err) {
+        console.error(err);
+        setError("Could not fetch user profile.");
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
 
     const formatDuration = (minutes) => {
     const hrs = Math.floor(minutes / 60);
@@ -84,6 +110,12 @@ import {
       console.error('Failed to create checkout session:', error);
     }
   };
+
+  const hasPurchasedCourse = () => {
+  if (!user || !user.purchasedCourses) return false;
+  return user.purchasedCourses.includes(course.id);
+};
+
 
 
 
@@ -183,7 +215,7 @@ import {
                     
                   </div>
                     <div className="lession-wrapper-container">
-                  {course.isPaid && openModules[idx] && (
+                  {!hasPurchasedCourse && openModules[idx] && (
                     <div className="lessons-list">
                       {mod.lessons.map((lesson, lidx) => (
                         <div key={lidx} className="lesson-block">
@@ -211,7 +243,7 @@ import {
               ))}
             </div>
         </div>
-
+{!hasPurchasedCourse() && (
         <div className="course-sidebar">
           <div className="price-box">
             <h2 className="discounted-price">{course.price} <span className="original-price">$99.99</span></h2>
@@ -230,7 +262,7 @@ import {
             </div>
             <button className="buy-button" onClick={handleBuyNow}>Buy Now</button>
           </div>
-        </div>
+        </div>)}
       </div>
       <Footer/>
     </>
