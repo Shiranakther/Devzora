@@ -221,6 +221,41 @@
     font-weight: bold;
     color: #333;
     margin-bottom: 40px;
-    
+    padding: 5px;
     text-align: center;
+    background-color: rgb(243, 243, 243);
+    
    }
+
+
+   .search-bar-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 50px;
+  justify-content: center;
+  
+  
+}
+.search-input{
+  max-width: 500px;
+}
+ .course-filter-dropdown{
+ padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #383838;
+  color:white;
+  border:none;
+  outline: none;
+
+ }
+ 
+ .course-price-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+outline: none;
+}

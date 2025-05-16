@@ -17,7 +17,7 @@ const CreateCourse = () => {
 
   return (
     <Dashboard>
-       <CourseForm onSubmit={handleCreate} />
+       <CourseForm onSubmit={handleCreate} btnname='Create Course' formtitle='Create' formsubtitle="Fill in the details to create a new course. You'll be able to update the content later"/>
     </Dashboard>
    
   );

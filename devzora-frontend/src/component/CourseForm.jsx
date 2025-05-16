@@ -344,7 +344,7 @@ import "../css/course/CourseForm.css";
 import Header from '../component/Header';
 import Footer from '../component/Footer'; 
 
-const CourseForm = ({ onSubmit, course = {} }) => {
+const CourseForm = ({ onSubmit, course = {} ,btnname,formtitle,formsubtitle}) => {
   const [formData, setFormData] = useState({
     title: '',
     shortDescription: '',
@@ -500,9 +500,9 @@ const CourseForm = ({ onSubmit, course = {} }) => {
     
 <form onSubmit={handleSubmit} className="form-container">
 
-<div className="course-creation-header-title1">Create Course
+<div className="course-creation-header-title1">{formtitle} Course
 
-  <div className="course-creation-header-title2">Fill in the details to create a new course. You'll be able to update the content later.</div>
+  <div className="course-creation-header-title2">{formsubtitle}</div>
 </div>
 
 
@@ -659,7 +659,7 @@ const CourseForm = ({ onSubmit, course = {} }) => {
         </div>
       ))}
       <button type="button" onClick={addModule} className="button-secondary">Add Module</button>
-      <button type="submit" className="button-submit">Create Course</button>
+      <button type="submit" className="button-submit">{btnname}</button>
     </form>
     
     </>
@@ -667,4 +667,5 @@ const CourseForm = ({ onSubmit, course = {} }) => {
 };
 
 export default CourseForm;
+
 

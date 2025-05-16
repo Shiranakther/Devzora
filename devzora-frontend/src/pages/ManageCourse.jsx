@@ -11,6 +11,10 @@ const ManageCourse = () => {
     const [user, setUser] = useState(null);
     const [formData, setFormData] = useState({});
     const [error, setError] = useState("");
+      const [levelFilter, setLevelFilter] = useState('');
+      const [categoryFilter, setCategoryFilter] = useState('');
+      const [minPrice, setMinPrice] = useState('');
+      const [maxPrice, setMaxPrice] = useState('');
   const navigate = useNavigate();
 
   const handleEnroll = (id) => {
@@ -77,11 +81,18 @@ const ManageCourse = () => {
   }, []);
 
   // 🔍 Filter courses based on search
-  const filteredCourses = courses
-  .filter(course => course.userId === user?.id)
-  .filter(course =>
-    course.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+ const filteredCourses = courses.filter(course => {
+    const matchesTitle = course.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesLevel = levelFilter ? course.level === levelFilter : true;
+    const matchesCategory = categoryFilter ? course.category === categoryFilter : true;
+    const matchesPrice =
+      course.isPaid
+        ? (minPrice === '' || course.price >= parseFloat(minPrice)) &&
+          (maxPrice === '' || course.price <= parseFloat(maxPrice))
+        : true;
+
+    return matchesTitle && matchesLevel && matchesCategory && matchesPrice;
+  });
 
 
 
@@ -100,20 +111,59 @@ const ManageCourse = () => {
     <Dashboard>
     <div className="course-list-container">
       
-        <div className='course-list-container-title'>All Courses</div>
+        <div className='course-list-container-title'>Manage Courses</div>
         {/* <Link to="/create-course" className="create-course-link">Create New Course</Link> */}
     
 
       
-      <div className="search-bar-container">
-        <input
-          type="text"
-          placeholder="Search courses by title..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
-        />
-      </div>
+ <div className="search-bar-container">
+          <input
+            type="text"
+            placeholder="Search courses by title..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+
+          <select
+            value={levelFilter}
+            onChange={(e) => setLevelFilter(e.target.value)}
+            className="course-filter-dropdown"
+          >
+            <option value="">All Levels</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+          </select>
+
+          <select
+            value={categoryFilter}
+            onChange={(e) => setCategoryFilter(e.target.value)}
+            className="course-filter-dropdown"
+          >
+            <option value="">All Categories</option>
+            <option value="Programming">Programming</option>
+            <option value="Design">Design</option>
+            <option value="Marketing">Marketing</option>
+            {/* Add more categories as needed */}
+          </select>
+
+          <input
+            type="number"
+            placeholder="Min Price"
+            value={minPrice}
+            onChange={(e) => setMinPrice(e.target.value)}
+            className="course-price-input"
+          />
+
+          <input
+            type="number"
+            placeholder="Max Price"
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value)}
+            className="course-price-input"
+          />
+        </div>
 
       <div className="course-cards-container">
         {filteredCourses.map(course => (
