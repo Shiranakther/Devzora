@@ -134,8 +134,13 @@ const ManageCourse = () => {
                 </div>
               <div className='course-card-course-details-price'> $ {course.isPaid ? `${course.price}` : 'Free'}</div>
               <div className="course-actions">
-                <Link to={`/edit-course/${course.id}`} className="edit-link" style={{width:'100px',backgroundColor:'#0080ff'}}>Edit</Link>
-                <button onClick={() => handleDelete(course.id)} className="delete-button" style={{width:'100px'}}>Delete</button>
+                <Link to={`/edit-course/${course.id}`} className="edit-link" style={{width:'80px',backgroundColor:'#0080ff'}}>Edit</Link>
+                <button onClick={() => handleDelete(course.id)} className="delete-button" style={{width:'80px'}}>Delete</button>
+                <button  className="delete-button" style={{width:'80px',backgroundColor:'green'}}
+                onClick={
+                    () => {
+                    navigate(`/teacher/assignments/${course.id}`)}}
+                >Add Tutorials</button>
                 
               </div>
             </div>
