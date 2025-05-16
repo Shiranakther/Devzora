@@ -19,6 +19,7 @@ import {
 export default function Dashboard({ children }) {
   const navigate = useNavigate();
   const [showCourses, setShowCourses] = useState(false);
+  const [showPost, setShowPost] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
       const handleLogout = () => {
@@ -93,11 +94,26 @@ export default function Dashboard({ children }) {
           </div>
         )}
 
-        
-         <button>
-            <MdPostAdd className="dashboard-icon" />
-            Posts
+        <button onClick={() => setShowPost(prev => !prev)}>
+          <MdLibraryBooks className="dashboard-icon" />
+          Post
+          <div className="dashboard-dropdown-container">
+           {showPost ? <FaChevronDown/> : <FaChevronRight/>}
+          </div>
+         
         </button>
+        {showPost && (
+          <div className="dashboard-dropdown">
+            <div className='dashboard-dropdown-option'
+              onClick={() => {
+                navigate('/post-user');
+              }}
+            >My posts</div> 
+          </div>
+        )}
+
+
+      
 
        <button>
             <MdAssignment className="dashboard-icon" />

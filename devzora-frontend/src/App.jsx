@@ -18,6 +18,9 @@ import Editprofile from './pages/Editprofile';
 import PaymentSuccess from './pages/PaymentSuccess';
 import MyCourses from './pages/MyCourses';
 import ManageCourse from './pages/ManageCourse';
+import UserPost from './pages/UserPost';
+import PostPage from './pages/PostPage';
+import UpdatePostPage from './pages/UpdatePostPage';
 
 const App = () => {
   return (
@@ -72,6 +75,19 @@ const App = () => {
         <Route
           path="/manage-course"
           element={<PrivateRoute element={<ManageCourse/>} />}
+        />
+        <Route
+          path="/post-update/:id"
+          element={<PrivateRoute element={<UpdatePostPage />} />}
+        />
+
+        <Route
+          path="/post"
+          element={<PrivateRoute element={<PostPage />} />}
+        />
+        <Route
+          path="/post-user"
+          element={<PrivateRoute element={<UserPost />} />}
         />
         <Route path="*" element={<Notfound />} />
       </Routes>
