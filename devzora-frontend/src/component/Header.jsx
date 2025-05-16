@@ -117,7 +117,8 @@ export default function Header() {
         </button>
         <button
           className={`header-button ${activeButton === 'posts' ? 'highlight' : 'header-button'}`}
-          onClick={() => handleButtonClick('posts')}
+          onClick={() => {handleButtonClick('posts'); navigate('/post');}}
+          
         >
           Posts
         </button>
