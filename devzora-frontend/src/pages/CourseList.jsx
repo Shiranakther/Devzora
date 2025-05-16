@@ -107,9 +107,9 @@ const CourseList = () => {
                 </div>
               <div className='course-card-course-details-price'> $ {course.isPaid ? `${course.price}` : 'Free'}</div>
               <div className="course-actions">
-                <Link to={`/edit-course/${course.id}`} className="edit-link">Edit</Link>
-                <button onClick={() => handleDelete(course.id)} className="delete-button">Delete</button>
-                <button className="enroll-button" onClick={() => handleEnroll(course.id)}>Enroll</button>
+                {/* <Link to={`/edit-course/${course.id}`} className="edit-link">Edit</Link>
+                <button onClick={() => handleDelete(course.id)} className="delete-button">Delete</button> */}
+                <button className="enroll-button" onClick={() => handleEnroll(course.id)} style={{width:'150px'}}>View</button>
               </div>
             </div>
           </div>
