@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CourseForm from '../component/CourseForm';
+import Dashboard from '../component/Dashboard';
 
 const EditCourse = () => {
   const [course, setCourse] = useState(null);
@@ -56,7 +57,7 @@ const EditCourse = () => {
     fetchCourse();  // Fetch course details when component mounts
   }, [id]);  // Only run again if `id` changes
 
-  return course ? <CourseForm onSubmit={handleUpdate} course={course} /> : <p>Loading...</p>;
+  return course ? <Dashboard> <CourseForm onSubmit={handleUpdate} course={course} btnname='Edit Course' formtitle='Edit'formsubtitle='Edit the details to update Existing Course'/> </Dashboard> : <p>Loading...</p>;
 };
 
 export default EditCourse;
