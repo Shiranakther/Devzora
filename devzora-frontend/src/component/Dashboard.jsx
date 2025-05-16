@@ -84,7 +84,11 @@ export default function Dashboard({ children }) {
                 navigate('/create-course');
               }}
             >Create Course</div>
-            <div className='dashboard-dropdown-option'>Manage Course</div>
+            <div className='dashboard-dropdown-option'
+            onClick={() => {
+                navigate('/manage-course');
+              }}
+            >Manage Course</div>
             <div className='dashboard-dropdown-option'>Enrolment Details</div>
           </div>
         )}
