@@ -1,1 +1,3 @@
 devzora/src/main/resources/application.properties
+config.bat
+node_modules
