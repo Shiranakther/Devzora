@@ -14,7 +14,7 @@ const PostPage = () => {
   const [newComment, setNewComment] = useState({});
   const [editComment, setEditComment] = useState({});
   const [showCreatePostPopup, setShowCreatePostPopup] = useState(false);
-  const [showUpdatePostPopup, setShowUpdatePostPopup] = useState(null); // Post ID for update
+  const [showUpdatePostPopup, setShowUpdatePostPopup] = useState(null);
   const [imageIndices, setImageIndices] = useState({});
   const [activeSlide, setActiveSlide] = useState('all');
   const [currentUserId, setCurrentUserId] = useState(null);
@@ -113,7 +113,7 @@ const PostPage = () => {
         ...prev,
         [userId]: {
           username: response.data.username,
-          roles: ['USER'], // Default role
+          roles: ['USER'],
         },
       }));
     } catch (err) {
@@ -772,7 +772,7 @@ const PostPage = () => {
           disabled={isUploading}
         />
         <div style={styles.fileInputContainer}>
-          <label>Images (Max 3):</label>
+          <label style={styles.label}>Images (Max 3):</label>
           <div
             style={styles.uploadRectangle}
             tabIndex={isUploading ? -1 : 0}
@@ -873,7 +873,7 @@ const PostPage = () => {
           </div>
         </div>
         <div style={styles.fileInputContainer}>
-          <label>Video (Max 1):</label>
+          <label style={styles.label}>Video (Max 1):</label>
           <div
             style={styles.uploadRectangle}
             tabIndex={isUploading ? -1 : 0}
@@ -944,7 +944,7 @@ const PostPage = () => {
           </button>
           {isUploading && (
             <div style={styles.loadingBarContainer}>
-              <div style={styles.progressBar}></div>
+              <div style={{ ...styles.progressBar, width: `${uploadProgress}%` }}></div>
             </div>
           )}
         </div>
@@ -1101,7 +1101,7 @@ const PostPage = () => {
     );
   };
 
-  // Styles (unchanged from original, adding UpdatePostPage styles)
+  // Enhanced styles with additional CSS properties
   const styles = {
     pageContainer: {
       display: 'flex',
@@ -1109,34 +1109,52 @@ const PostPage = () => {
       minHeight: '100vh',
       backgroundColor: '#f4f6f8',
       boxSizing: 'border-box',
+      padding: '20px 10px', // Added padding for better spacing
+      '@media (max-width: 768px)': {
+        padding: '10px 5px', // Responsive padding for smaller screens
+      },
     },
     container: {
-      maxWidth: '800px',
+      maxWidth: '1200px',
       width: '100%',
       margin: '20px auto',
-      padding: '20px',
+      padding: '25px', // Increased padding
       border: '1px solid #e0e0e0',
-      borderRadius: '8px',
+      borderRadius: '10px', // Slightly larger border-radius
       backgroundColor: '#fff',
       flex: '1',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+      boxShadow: '0 4px 8px rgba(0,0,0,0.1)', // Enhanced shadow
       boxSizing: 'border-box',
+      transition: 'box-shadow 0.3s ease', // Smooth shadow transition
+      '@media (max-width: 768px)': {
+        padding: '15px',
+        margin: '10px auto',
+        borderRadius: '8px',
+      },
     },
     headerContainer: {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginBottom: '20px',
+      marginBottom: '25px', // Increased margin
+      flexWrap: 'wrap', // Added for responsiveness
+      gap: '15px', // Added gap for wrapped items
     },
     tabContainer: {
       display: 'flex',
       justifyContent: 'center',
-      marginBottom: '20px',
+      marginBottom: '25px',
       borderBottom: '2px solid #e0e0e0',
-      paddingBottom: '5px',
+      paddingBottom: '8px', // Increased padding
+      gap: '15px', // Added gap between tabs
+      flexWrap: 'wrap', // Added for responsiveness
+      '@media (max-width: 768px)': {
+        justifyContent: 'flex-start',
+        gap: '10px',
+      },
     },
     tabButton: {
-      padding: '10px 20px',
+      padding: '12px 24px', // Increased padding
       fontSize: '16px',
       fontWeight: '600',
       color: '#34495e',
@@ -1144,68 +1162,102 @@ const PostPage = () => {
       border: 'none',
       borderBottom: '2px solid transparent',
       cursor: 'pointer',
-      transition: 'all 0.3s',
-      margin: '0 10px',
+      transition: 'all 0.4s ease', // Smoother transition
+      margin: '0 12px',
+      borderRadius: '4px', // Added border-radius
+      '@media (max-width: 768px)': {
+        padding: '8px 16px',
+        fontSize: '14px',
+        margin: '0 8px',
+      },
     },
     activeTabButton: {
       color: '#007bff',
       borderBottom: '2px solid #007bff',
+      backgroundColor: 'rgba(0,123,255,0.05)', // Subtle background for active tab
     },
     postCard: {
-      maxWidth: '600px',
+      maxWidth: '950px',
       width: '100%',
       border: '1px solid #e0e0e0',
-      borderRadius: '8px',
-      padding: '20px',
-      margin: '0 auto 20px auto',
+      borderRadius: '10px', // Increased border-radius
+      padding: '25px', // Increased padding
+      margin: '0 auto 25px auto',
       backgroundColor: '#fff',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-      transition: 'box-shadow 0.3s, transform 0.3s',
+      boxShadow: '0 4px 8px rgba(0,0,0,0.1)', // Enhanced shadow
+      transition: 'box-shadow 0.3s ease, transform 0.3s ease', // Smoother transitions
       boxSizing: 'border-box',
+      ':hover': {
+        boxShadow: '0 6px 12px rgba(0,0,0,0.15)', // Hover effect
+        transform: 'translateY(-2px)', // Subtle lift
+      },
+      '@media (max-width: 768px)': {
+        padding: '15px',
+        margin: '0 auto 15px auto',
+        borderRadius: '8px',
+      },
     },
     postHeader: {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginBottom: '10px',
+      marginBottom: '15px', // Increased margin
+      flexWrap: 'wrap', // Added for responsiveness
+      gap: '10px', // Added gap
     },
     title: {
       fontSize: '24px',
       fontWeight: '600',
       color: '#2c3e50',
-      marginBottom: '5px',
+      marginBottom: '8px', // Increased margin
+      lineHeight: '1.4', // Added for better readability
+      '@media (max-width: 768px)': {
+        fontSize: '20px',
+      },
     },
     description: {
       fontSize: '16px',
       color: '#7f8c8d',
-      marginBottom: '15px',
-      lineHeight: '1.6',
+      marginBottom: '20px', // Increased margin
+      lineHeight: '1.8', // Improved readability
+      '@media (max-width: 768px)': {
+        fontSize: '14px',
+      },
     },
     courseLink: {
       color: '#007bff',
       textDecoration: 'underline',
       fontSize: '14px',
       fontWeight: '500',
-      marginBottom: '10px',
+      marginBottom: '15px', // Increased margin
       display: 'inline-block',
-      transition: 'color 0.3s',
+      transition: 'color 0.3s ease, transform 0.2s ease', // Added transform transition
+      ':hover': {
+        transform: 'scale(1.02)', // Subtle scale on hover
+      },
     },
     imageCarousel: {
       position: 'relative',
       width: '100%',
       maxWidth: '400px',
       height: '300px',
-      margin: '0 auto 15px',
+      margin: '0 auto 20px',
       overflow: 'hidden',
-      borderRadius: '5px',
+      borderRadius: '8px', // Increased border-radius
       border: '1px solid #ecf0f1',
       boxSizing: 'border-box',
+      boxShadow: '0 2px 6px rgba(0,0,0,0.1)', // Added shadow
+      '@media (max-width: 768px)': {
+        maxWidth: '100%',
+        height: '200px',
+      },
     },
     image: {
       width: '100%',
       height: '100%',
       objectFit: 'cover',
       display: 'block',
+      transition: 'opacity 0.3s ease', // Added transition
     },
     arrowButton: {
       position: 'absolute',
@@ -1215,229 +1267,318 @@ const PostPage = () => {
       color: '#fff',
       border: 'none',
       borderRadius: '50%',
-      width: '32px',
-      height: '32px',
+      width: '36px', // Slightly larger
+      height: '36px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       cursor: 'pointer',
-      transition: 'background-color 0.3s',
+      transition: 'background-color 0.3s ease, transform 0.2s ease', // Smoother transition
+      ':hover': {
+        transform: 'translateY(-50%) scale(1.1)', // Subtle scale on hover
+      },
     },
     leftArrow: {
-      left: '10px',
+      left: '15px', // Adjusted position
     },
     rightArrow: {
-      right: '10px',
+      right: '15px',
     },
     video: {
       width: '100%',
       maxWidth: '400px',
       height: 'auto',
       maxHeight: '250px',
-      borderRadius: '5px',
-      margin: '0 auto 15px',
+      borderRadius: '8px', // Increased border-radius
+      margin: '0 auto 20px',
       display: 'block',
       border: '1px solid #ecf0f1',
       boxSizing: 'border-box',
+      boxShadow: '0 2px 6px rgba(0,0,0,0.1)', // Added shadow
+      '@media (max-width: 768px)': {
+        maxWidth: '100%',
+        maxHeight: '200px',
+      },
     },
     videoError: {
       fontSize: '14px',
       color: '#e74c3c',
       textAlign: 'center',
-      margin: '10px 0',
+      margin: '15px 0', // Increased margin
+      fontStyle: 'italic', // Added for emphasis
     },
     likeContainer: {
       display: 'flex',
       alignItems: 'center',
-      gap: '10px',
-      margin: '10px 0',
+      gap: '12px', // Increased gap
+      margin: '15px 0',
+      flexWrap: 'wrap', // Added for responsiveness
     },
     likeButton: {
-      padding: '8px 16px',
+      padding: '10px 20px', // Increased padding
       fontWeight: '600',
       color: '#fff',
       backgroundColor: '#ff6b6b',
       border: 'none',
-      borderRadius: '4px',
+      borderRadius: '6px', // Increased border-radius
       cursor: 'pointer',
-      transition: 'background-color 0.3s',
+      transition: 'background-color 0.3s ease, transform 0.2s ease', // Added transform
+      ':hover': {
+        transform: 'scale(1.05)', // Subtle scale on hover
+      },
+      '@media (max-width: 768px)': {
+        padding: '8px 16px',
+      },
     },
     unlikeButton: {
-      padding: '8px 16px',
+      padding: '10px 20px',
       fontWeight: '600',
       color: '#fff',
       backgroundColor: '#dc3545',
       border: 'none',
-      borderRadius: '4px',
+      borderRadius: '6px',
       cursor: 'pointer',
-      transition: 'background-color 0.3s',
+      transition: 'background-color 0.3s ease, transform 0.2s ease',
+      ':hover': {
+        transform: 'scale(1.05)',
+      },
+      '@media (max-width: 768px)': {
+        padding: '8px 16px',
+      },
     },
     followButton: {
-      padding: '6px 12px',
+      padding: '8px 16px', // Increased padding
       fontWeight: '600',
       color: '#fff',
       backgroundColor: '#17a2b8',
       border: 'none',
-      borderRadius: '4px',
+      borderRadius: '6px',
       cursor: 'pointer',
-      transition: 'background-color 0.3s',
+      transition: 'background-color 0.3s ease, transform 0.2s ease',
+      ':hover': {
+        transform: 'scale(1.05)',
+      },
     },
     unfollowButton: {
-      padding: '6px 12px',
+      padding: '8px 16px',
       fontWeight: '600',
       color: '#fff',
       backgroundColor: '#6c757d',
       border: 'none',
-      borderRadius: '4px',
+      borderRadius: '6px',
       cursor: 'pointer',
-      transition: 'background-color 0.3s',
+      transition: 'background-color 0.3s ease, transform 0.2s ease',
+      ':hover': {
+        transform: 'scale(1.05)',
+      },
     },
     likeCount: {
       fontSize: '14px',
       color: '#34495e',
       fontWeight: '500',
+      marginLeft: '5px', // Added margin
     },
     commentsContainer: {
-      marginTop: '20px',
-      padding: '20px',
+      marginTop: '25px', // Increased margin
+      padding: '25px',
       border: '1px solid #e0e0e0',
-      borderRadius: '8px',
+      borderRadius: '10px', // Increased border-radius
       backgroundColor: '#f9f9f9',
-      boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+      boxShadow: '0 2px 6px rgba(0,0,0,0.05)', // Enhanced shadow
       boxSizing: 'border-box',
+      transition: 'box-shadow 0.3s ease', // Added transition
     },
     comment: {
-      marginBottom: '15px',
-      padding: '15px',
+      marginBottom: '20px', // Increased margin
+      padding: '20px', // Increased padding
       backgroundColor: '#fff',
-      borderRadius: '6px',
+      borderRadius: '8px', // Increased border-radius
       border: '1px solid #e0e0e0',
-      boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.05)', // Enhanced shadow
       boxSizing: 'border-box',
+      transition: 'box-shadow 0.3s ease', // Added transition
+      ':hover': {
+        boxShadow: '0 4px 8px rgba(0,0,0,0.1)', // Hover effect
+      },
     },
     commentText: {
       fontSize: '14px',
-      lineHeight: '1.5',
-      marginBottom: '12px',
+      lineHeight: '1.6', // Improved readability
+      marginBottom: '15px', // Increased margin
       color: '#333',
     },
     commentButtonContainer: {
       display: 'flex',
-      gap: '12px',
+      gap: '15px', // Increased gap
       justifyContent: 'flex-start',
+      flexWrap: 'wrap', // Added for responsiveness
     },
     commentInput: {
       width: '100%',
-      padding: '10px',
-      margin: '15px 0 10px 0',
+      padding: '12px', // Increased padding
+      margin: '20px 0 15px 0', // Adjusted margin
       border: '1px solid #e0e0e0',
-      borderRadius: '4px',
+      borderRadius: '6px', // Increased border-radius
       fontSize: '14px',
       boxSizing: 'border-box',
+      transition: 'border-color 0.3s ease, box-shadow 0.3s ease', // Added transition
+      ':focus': {
+        borderColor: '#007bff',
+        boxShadow: '0 0 5px rgba(0,123,255,0.3)', // Focus effect
+      },
     },
     commentButton: {
-      padding: '8px 16px',
+      padding: '10px 20px', // Increased padding
       fontWeight: '600',
       color: '#fff',
       backgroundColor: '#28a745',
       border: 'none',
-      borderRadius: '4px',
+      borderRadius: '6px', // Increased border-radius
       cursor: 'pointer',
-      transition: 'background-color 0.3s',
+      transition: 'background-color 0.3s ease, transform 0.2s ease',
+      ':hover': {
+        transform: 'scale(1.05)',
+      },
+      '@media (max-width: 768px)': {
+        padding: '8px 16px',
+      },
     },
     editCommentInput: {
       width: '100%',
-      padding: '10px',
-      marginBottom: '12px',
+      padding: '12px',
+      marginBottom: '15px',
       border: '1px solid #e0e0e0',
-      borderRadius: '4px',
+      borderRadius: '6px',
       fontSize: '14px',
       boxSizing: 'border-box',
+      transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+      ':focus': {
+        borderColor: '#007bff',
+        boxShadow: '0 0 5px rgba(0,123,255,0.3)',
+      },
     },
     editButton: {
-      padding: '6px 12px',
+      padding: '8px 16px', // Increased padding
       fontWeight: '600',
       color: '#fff',
       backgroundColor: '#ffc107',
       border: 'none',
-      borderRadius: '4px',
+      borderRadius: '6px',
       cursor: 'pointer',
-      transition: 'background-color 0.3s',
+      transition: 'background-color 0.3s ease, transform 0.2s ease',
+      ':hover': {
+        transform: 'scale(1.05)',
+      },
     },
     deleteCommentButton: {
-      padding: '6px 12px',
+      padding: '8px 16px',
       fontWeight: '600',
       color: '#fff',
       backgroundColor: '#dc3545',
       border: 'none',
-      borderRadius: '4px',
+      borderRadius: '6px',
       cursor: 'pointer',
-      transition: 'background-color 0.3s',
+      transition: 'background-color 0.3s ease, transform 0.2s ease',
+      ':hover': {
+        transform: 'scale(1.05)',
+      },
     },
     error: {
       color: '#e74c3c',
       fontSize: '14px',
       textAlign: 'center',
-      margin: '10px 0',
+      margin: '15px 0', // Increased margin
+      padding: '10px', // Added padding
+      borderRadius: '4px', // Added border-radius
+      backgroundColor: 'rgba(231,76,60,0.1)', // Subtle background
     },
     success: {
       color: '#28a745',
       fontSize: '14px',
       textAlign: 'center',
-      margin: '10px 0',
+      margin: '15px 0',
+      padding: '10px',
+      borderRadius: '4px',
+      backgroundColor: 'rgba(40,167,69,0.1)',
     },
     noPosts: {
       fontSize: '18px',
       textAlign: 'center',
       color: '#7f8c8d',
       fontStyle: 'italic',
-      margin: '20px 0',
+      margin: '25px 0', // Increased margin
+      padding: '10px', // Added padding
     },
     buttonContainer: {
       display: 'flex',
-      gap: '10px',
-      marginTop: '15px',
+      gap: '12px', // Increased gap
+      marginTop: '20px', // Increased margin
       justifyContent: 'flex-end',
+      flexWrap: 'wrap', // Added for responsiveness
     },
     updateButton: {
-      padding: '8px 16px',
+      padding: '10px 20px', // Increased padding
       fontWeight: '600',
       color: '#fff',
       backgroundColor: '#007bff',
       border: 'none',
-      borderRadius: '4px',
+      borderRadius: '6px',
       cursor: 'pointer',
-      transition: 'background-color 0.3s',
+      transition: 'background-color 0.3s ease, transform 0.2s ease',
+      ':hover': {
+        transform: 'scale(1.05)',
+      },
+      '@media (max-width: 768px)': {
+        padding: '8px 16px',
+      },
     },
     deleteButton: {
-      padding: '8px 16px',
+      padding: '10px 20px',
       fontWeight: '600',
       color: '#fff',
       backgroundColor: '#dc3545',
       border: 'none',
-      borderRadius: '4px',
+      borderRadius: '6px',
       cursor: 'pointer',
-      transition: 'background-color 0.3s',
+      transition: 'background-color 0.3s ease, transform 0.2s ease',
+      ':hover': {
+        transform: 'scale(1.05)',
+      },
+      '@media (max-width: 768px)': {
+        padding: '8px 16px',
+      },
     },
     createButton: {
-      padding: '8px 16px',
+      padding: '10px 20px',
       fontWeight: '600',
       color: '#fff',
       backgroundColor: '#17a2b8',
       border: 'none',
-      borderRadius: '4px',
+      borderRadius: '6px',
       cursor: 'pointer',
-      transition: 'background-color 0.3s',
+      transition: 'background-color 0.3s ease, transform 0.2s ease',
+      ':hover': {
+        transform: 'scale(1.05)',
+      },
+      '@media (max-width: 768px)': {
+        padding: '8px 16px',
+      },
     },
     followListButton: {
-      padding: '8px 16px',
+      padding: '10px 20px',
       fontWeight: '600',
       color: '#fff',
       backgroundColor: '#6f42c1',
       border: 'none',
-      borderRadius: '4px',
+      borderRadius: '6px',
       cursor: 'pointer',
-      transition: 'background-color 0.3s',
+      transition: 'background-color 0.3s ease, transform 0.2s ease',
+      ':hover': {
+        transform: 'scale(1.05)',
+      },
+      '@media (max-width: 768px)': {
+        padding: '8px 16px',
+      },
     },
     popupOverlay: {
       position: 'fixed',
@@ -1451,67 +1592,103 @@ const PostPage = () => {
       alignItems: 'center',
       zIndex: 1000,
       boxSizing: 'border-box',
+      transition: 'opacity 0.3s ease', // Added transition
     },
     popupContainer: {
       backgroundColor: '#fff',
-      borderRadius: '8px',
-      padding: '20px',
+      borderRadius: '10px', // Increased border-radius
+      padding: '25px', // Increased padding
       maxWidth: '600px',
       width: '90%',
-      maxHeight: '80vh',
+      maxHeight: '85vh', // Slightly increased
       overflowY: 'auto',
-      boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+      boxShadow: '0 6px 12px rgba(0,0,0,0.2)', // Enhanced shadow
       position: 'relative',
       boxSizing: 'border-box',
+      transition: 'transform 0.3s ease', // Added transition
+      ':hover': {
+        transform: 'scale(1.01)', // Subtle scale on hover
+      },
+      '@media (max-width: 768px)': {
+        padding: '15px',
+        maxWidth: '95%',
+      },
     },
     popupHeader: {
       fontSize: '24px',
       fontWeight: '700',
       color: '#2c3e50',
-      marginBottom: '15px',
+      marginBottom: '20px', // Increased margin
       textAlign: 'center',
+      lineHeight: '1.4', // Added for readability
+      '@media (max-width: 768px)': {
+        fontSize: '20px',
+      },
     },
     cancelButton: {
-      padding: '8px 16px',
+      padding: '10px 20px',
       fontWeight: '600',
       color: '#fff',
       backgroundColor: '#6c757d',
       border: 'none',
-      borderRadius: '4px',
+      borderRadius: '6px',
       cursor: 'pointer',
-      transition: 'background-color 0.3s',
-      marginTop: '10px',
+      transition: 'background-color 0.3s ease, transform 0.2s ease',
+      marginTop: '15px', // Increased margin
       width: '100%',
+      ':hover': {
+        transform: 'scale(1.05)',
+      },
+      '@media (max-width: 768px)': {
+        padding: '8px 16px',
+      },
     },
     form: {
       display: 'flex',
       flexDirection: 'column',
-      gap: '15px',
+      gap: '20px', // Increased gap
     },
     input: {
-      padding: '10px',
+      padding: '12px', // Increased padding
       fontSize: '16px',
       border: '1px solid #ccc',
-      borderRadius: '4px',
+      borderRadius: '6px',
       display: 'none',
+      transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+      ':focus': {
+        borderColor: '#007bff',
+        boxShadow: '0 0 5px rgba(0,123,255,0.3)',
+      },
     },
     textarea: {
-      padding: '10px',
+      padding: '12px',
       fontSize: '16px',
       border: '1px solid #ccc',
-      borderRadius: '4px',
-      minHeight: '100px',
+      borderRadius: '6px',
+      minHeight: '120px', // Increased height
+      transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+      ':focus': {
+        borderColor: '#007bff',
+        boxShadow: '0 0 5px rgba(0,123,255,0.3)',
+      },
+      '@media (max-width: 768px)': {
+        minHeight: '100px',
+      },
     },
     button: {
-      padding: '10px',
+      padding: '12px', // Increased padding
       backgroundColor: '#28a745',
       color: 'white',
       border: 'none',
-      borderRadius: '4px',
+      borderRadius: '6px',
       cursor: 'pointer',
       fontSize: '16px',
       opacity: isUploading ? '0.6' : '1',
       pointerEvents: isUploading ? 'none' : 'auto',
+      transition: 'background-color 0.3s ease, transform 0.2s ease',
+      ':hover': {
+        transform: 'scale(1.05)',
+      },
     },
     buttonHover: {
       backgroundColor: '#218838',
@@ -1519,13 +1696,19 @@ const PostPage = () => {
     fileInputContainer: {
       display: 'flex',
       flexDirection: 'column',
-      gap: '10px',
+      gap: '12px', // Increased gap
+    },
+    label: {
+      fontSize: '16px',
+      fontWeight: '500',
+      color: '#2c3e50',
+      marginBottom: '8px', // Added margin
     },
     uploadRectangle: {
       width: '100%',
-      height: '150px',
+      height: '160px', // Slightly increased height
       border: '2px dashed #ccc',
-      borderRadius: '8px',
+      borderRadius: '10px', // Increased border-radius
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
@@ -1533,62 +1716,80 @@ const PostPage = () => {
       backgroundColor: '#f5f5f5',
       cursor: isUploading ? 'not-allowed' : 'pointer',
       position: 'relative',
-      transition: 'border-color 0.2s ease-in-out',
-      padding: '10px',
-      gap: '10px',
+      transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+      padding: '12px', // Increased padding
+      gap: '12px', // Increased gap
       overflowX: 'auto',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.05)', // Added shadow
+      '@media (max-width: 768px)': {
+        height: '140px',
+        padding: '8px',
+      },
     },
     uploadRectangleHover: {
       borderColor: '#28a745',
+      boxShadow: '0 4px 8px rgba(0,0,0,0.1)', // Added shadow on hover
     },
     uploadIcon: {
-      fontSize: '24px',
+      fontSize: '28px', // Increased size
       color: '#666',
-      marginBottom: '5px',
+      marginBottom: '8px', // Increased margin
     },
     uploadText: {
       fontSize: '16px',
       color: '#666',
+      fontWeight: '500', // Added weight
     },
     fileCount: {
       fontSize: '14px',
       color: '#333',
-      marginTop: '5px',
+      marginTop: '8px', // Increased margin
+      fontStyle: 'italic', // Added for emphasis
     },
     previewImageContainer: {
       position: 'relative',
       width: '80px',
       height: '80px',
-      borderRadius: '4px',
+      borderRadius: '6px', // Increased border-radius
       overflow: 'hidden',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+      boxShadow: '0 2px 6px rgba(0,0,0,0.1)', // Enhanced shadow
       flexShrink: '0',
+      transition: 'transform 0.2s ease', // Added transition
+      ':hover': {
+        transform: 'scale(1.05)', // Subtle scale on hover
+      },
     },
     previewImage: {
       width: '100%',
       height: '100%',
       objectFit: 'cover',
+      transition: 'opacity 0.3s ease', // Added transition
     },
     previewVideoContainer: {
       position: 'relative',
       width: '120px',
       height: '90px',
-      borderRadius: '4px',
+      borderRadius: '6px',
       overflow: 'hidden',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+      boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
       flexShrink: '0',
+      transition: 'transform 0.2s ease',
+      ':hover': {
+        transform: 'scale(1.05)',
+      },
     },
     previewVideo: {
       width: '100%',
       height: '100%',
       objectFit: 'cover',
+      transition: 'opacity 0.3s ease',
     },
     removeX: {
       position: 'absolute',
       top: '5px',
       right: '5px',
-      width: '20px',
-      height: '20px',
+      width: '24px', // Increased size
+      height: '24px',
       backgroundColor: 'rgba(220, 53, 69, 0.8)',
       color: 'white',
       border: 'none',
@@ -1597,28 +1798,31 @@ const PostPage = () => {
       alignItems: 'center',
       justifyContent: 'center',
       cursor: 'pointer',
-      fontSize: '12px',
+      fontSize: '14px', // Increased font size
       fontWeight: 'bold',
       opacity: '0',
-      transition: 'opacity 0.2s ease-in-out',
+      transition: 'opacity 0.3s ease, transform 0.2s ease',
       pointerEvents: isUploading ? 'none' : 'auto',
+      ':hover': {
+        transform: 'scale(1.1)', // Subtle scale on hover
+      },
     },
     previewHover: {
       opacity: '1',
     },
     loadingBarContainer: {
       width: '100%',
-      height: '8px',
+      height: '10px', // Increased height
       backgroundColor: '#e0e0e0',
-      borderRadius: '4px',
+      borderRadius: '6px', // Increased border-radius
       overflow: 'hidden',
-      marginTop: '5px',
+      marginTop: '8px', // Increased margin
+      boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.1)', // Added inset shadow
     },
     progressBar: {
-      width: `${uploadProgress}%`,
       height: '100%',
       backgroundColor: '#28a745',
-      transition: 'width 0.3s ease-in-out',
+      transition: 'width 0.4s ease-in-out', // Smoother transition
     },
   };
 
@@ -1627,10 +1831,10 @@ const PostPage = () => {
       <Header />
       <div style={styles.container}>
         <div style={styles.headerContainer}>
-          <h2 style={{ fontSize: '28px', fontWeight: '700', color: '#2c3e50' }}>
+          <h2 style={{ fontSize: '28px', fontWeight: '700', color: '#2c3e50', lineHeight: '1.4' }}>
             All Posts
           </h2>
-          <div style={{ display: 'flex', gap: '10px' }}>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
             <button
               style={styles.createButton}
               onClick={handleCreatePost}
