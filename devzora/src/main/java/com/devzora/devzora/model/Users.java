@@ -27,6 +27,7 @@ public class Users {
     private String email; // Optional: Store user's email
     private String phone;
     private String profilePictureUrl;
+    private List<String> purchasedCourses;
     private List<String> roles;
     private List<String> following = new ArrayList<>(); // Users this user follows
     private List<String> followers = new ArrayList<>(); // Users who follow this user
