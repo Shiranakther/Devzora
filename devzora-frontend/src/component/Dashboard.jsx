@@ -21,7 +21,7 @@ import {
 export default function Dashboard({ children }) {
   const navigate = useNavigate();
   const [showCourses, setShowCourses] = useState(false);
-  const [showPost, setShowPost] = useState(false);
+  const [showPosts, setShowPosts] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [user, setUser] = useState(null);
     const [formData, setFormData] = useState({});
@@ -126,23 +126,24 @@ export default function Dashboard({ children }) {
           </div>
         )}
 
-        <button onClick={() => setShowPost(prev => !prev)}>
-          <MdLibraryBooks className="dashboard-icon" />
-          Post
+        <button onClick={() => setShowPosts(prev => !prev)}>
+          <MdPostAdd className="dashboard-icon" />
+          Posts
           <div className="dashboard-dropdown-container">
-           {showPost ? <FaChevronDown/> : <FaChevronRight/>}
+            {showPosts ? <FaChevronDown /> : <FaChevronRight />}
           </div>
-         
         </button>
-        {showPost && (
+        {showPosts && (
           <div className="dashboard-dropdown">
-            <div className='dashboard-dropdown-option'
-              onClick={() => {
-                navigate('/post-user');
-              }}
-            >My posts</div> 
+            <div
+              className='dashboard-dropdown-option'
+              onClick={() => navigate('/post-user')}
+            >
+              My Posts
+            </div>
           </div>
         )}
+
 
 
       
