@@ -177,7 +177,7 @@ export default function Header() {
           </button>
           <button 
             className="dropdown-item" 
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate('/profile')}
           >
             Dashboard
           </button>

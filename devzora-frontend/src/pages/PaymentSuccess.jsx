@@ -52,7 +52,7 @@ const PaymentSuccess = () => {
         });
 
         setLoading(false);
-        navigate("/"); // or wherever you want to send them after
+        navigate("/my-courses"); // or wherever you want to send them after
       } catch (err) {
         console.error("Update failed", err);
         setError("Failed to update user with purchased course");
