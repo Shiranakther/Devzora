@@ -66,6 +66,15 @@
 - **Auth**: OAuth 2.0 (Google, GitHub)
 
 ---
+## User Interfaces
+
+<img width="1920" height="1898" alt="image" src="https://github.com/user-attachments/assets/b560f553-1bc3-4dac-ab52-93ffb6e60cd5" />
+<img width="1920" height="2013" alt="image" src="https://github.com/user-attachments/assets/8ab26322-bc6b-4f2a-af7c-956320f9b540" />
+<img width="1920" height="2803" alt="image" src="https://github.com/user-attachments/assets/1179d51f-30a9-45f9-9e51-875c33a36017" />
+<img width="1920" height="881" alt="image" src="https://github.com/user-attachments/assets/03593c36-0855-4ab3-9dbb-961c8efd1bd9" />
+
+
+
 
 ## 📦 Installation
 
